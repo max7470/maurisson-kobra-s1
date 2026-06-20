@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "maintenance",
+    "source_md": ["01-machine-et-wiki.md", "02-conseils-pieges-forums.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr"
+  },
+  "printer": [
+    {
+      "item": "Vis Z (lead screws ×3)",
+      "frequency": "~tous les 3 mois ou dès qu'un bruit anormal apparaît",
+      "how": "Chiffon non pelucheux, puis Z à zéro → appliquer de la GRAISSE (pas d'huile : elle coule, pas de WD-40) sur toute la hauteur, plateau en haut puis en bas.",
+      "warning": "⚠️ JAMAIS d'huile ni WD-40 sur les vis Z (l'huile coule). NB : bruit métallique > 350 mm/s = normal."
+    },
+    {
+      "item": "Tiges lisses Y (linear rods / rails Y)",
+      "frequency": "Contrôle mensuel (propres et sans débris)",
+      "how": "Souffler la poussière (soufflette douce), chiffon, puis un peu de graisse répartie en bougeant l'axe à la main.",
+      "warning": ""
+    },
+    {
+      "item": "Tiges lisses X",
+      "frequency": "Quand sales",
+      "how": "Chiffon + alcool UNIQUEMENT.",
+      "warning": "⚠️ JAMAIS de graisse sur l'axe X : paliers graphène autolubrifiants."
+    },
+    {
+      "item": "Cutter (lame de coupe filament)",
+      "frequency": "Après 3–5 bobines imprimées",
+      "how": "Démonter (clé Allen S2.0), inspecter l'usure, remplacer si usé.",
+      "warning": ""
+    },
+    {
+      "item": "Hotend / buse",
+      "frequency": "Si sous-extrusion ou buse sale",
+      "how": "Retirer la chaussette silicone, chauffer à 200 °C, essuyer (gants !) ; chauffer à 230 °C et passer l'aiguille.",
+      "warning": "⚠️ Gants : risque de brûlure."
+    },
+    {
+      "item": "Chaussette / manchon silicone de buse",
+      "frequency": "Inspection régulière",
+      "how": "Remplacer si usée ou encroûtée de filament.",
+      "warning": ""
+    },
+    {
+      "item": "Ventilateurs (hotend, façade, auxiliaire)",
+      "frequency": "Régulièrement",
+      "how": "Soufflette / pinceau / coton-tige ; alcool isopropylique pour taches tenaces. Démontage si très encrassé.",
+      "warning": "Le ventilateur de carte mère tourne même au repos, c'est voulu (sécurité)."
+    },
+    {
+      "item": "Plateau spring steel (PEI acier ressort)",
+      "frequency": "Régulièrement",
+      "how": "Alcool ou détergent (savon + eau chaude). Le décollement en cours de print est 9 fois sur 10 dû à une plaque grasse → savon + eau, pas juste l'alcool.",
+      "warning": "⚠️ Ne pas toucher la surface avec les doigts (traces grasses = défauts d'adhérence)."
+    },
+    {
+      "item": "Caméra",
+      "frequency": "Si image floue",
+      "how": "Chiffon non pelucheux + alcool isopropylique.",
+      "warning": ""
+    },
+    {
+      "item": "Sachet de charbon actif",
+      "frequency": "Régénérer ~1×/mois (3–5 jours à l'air libre) ; remplacer après ~1 an max (2–3 mois en usage odeurs fortes / ABS-ASA)",
+      "how": "Dans la trappe interne du caisson. Recharges en boutique officielle.",
+      "warning": ""
+    },
+    {
+      "item": "Bac à purge ACE Pro",
+      "frequency": "Régulièrement",
+      "how": "Vider le bac à purge ACE Pro régulièrement.",
+      "warning": ""
+    },
+    {
+      "item": "Courroies XY (tension)",
+      "frequency": "Vérification régulière",
+      "how": "Vérifier la tension des courroies (capteur intégré côté machine).",
+      "warning": ""
+    }
+  ],
+  "ace_pro": [
+    {
+      "item": "Tubes PTFE (Teflon)",
+      "frequency": "Remplacer tous les 2 mois en usage normal ; contrôle mensuel si filaments abrasifs",
+      "how": "Retirer le clip bleu, presser la bague noire du raccord pneumatique, tirer le tube. Contrôler l'usure interne ET côté buffer mechanism.",
+      "warning": "⚠️ Tube usé/ovalisé non remplacé = frottements et bourrage garanti."
+    },
+    {
+      "item": "Goulottes d'entrée (feed channel)",
+      "frequency": "Contrôle régulier",
+      "how": "Pièce de rechange en boutique ; 2 vis Allen S2.5. Modèles anti-usure DIY imprimables fournis par le wiki.",
+      "warning": "⚠️ Usure sévère = bourrage."
+    },
+    {
+      "item": "Carte de détection + LED",
+      "frequency": "Si la LED clignote au chargement",
+      "how": "Poussière sur le capteur → chiffon propre ; nettoyer aussi le photo-interrupteur ; vérifier câbles PCBA et la palette de détection (pas pliée).",
+      "warning": ""
+    },
+    {
+      "item": "Rouleaux porte-bobines",
+      "frequency": "Contrôle régulier",
+      "how": "Doivent tourner librement ; si rouillé/grippé → huile sur les roulements (ici oui, de l'huile).",
+      "warning": "⚠️ Ne pas perdre les roulements latéraux au démontage."
+    },
+    {
+      "item": "Buffer mechanism (mécanisme tampon)",
+      "frequency": "Si bruits anormaux / contrôle",
+      "how": "Démonter le capot (clé S2.5) puis le mécanisme (S2.0), vérifier que les ressorts des 4 buffers rebondissent normalement.",
+      "warning": ""
+    }
+  ],
+  "notes": [
+    "⚠️ Toujours éteindre et débrancher l'ACE Pro avant toute maintenance.",
+    "⚠️ JAMAIS de graisse sur l'axe X : paliers graphène autolubrifiants (alcool uniquement).",
+    "⚠️ JAMAIS d'huile ni WD-40 sur les vis Z (l'huile coule) : utiliser de la graisse.",
+    "Sur l'ACE Pro, l'huile est en revanche correcte pour les roulements des rouleaux porte-bobines.",
+    "Ne jamais toucher la surface du plateau PEI avec les doigts (traces grasses = mauvaise adhérence).",
+    "Les 2 clés Allen S2.0 et S2.5 servent à quasi toutes les interventions (vis de lit, capot buffer ACE) : les garder près de la machine.",
+    "💡 Garder firmware machine + ACE + slicer à jour : Anycubic corrige beaucoup par logiciel (le premier-layer notamment)."
+  ],
+  "sources": [
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/maintenance-recommendations",
+    "https://www.youtube.com/embed/K6tdYtwVDas",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-3-max/ace-pro-maintenance-recommendations",
+    "https://wiki.anycubic.com/k3-max/ace+guide+v2.3mf",
+    "https://wiki.anycubic.com/k3-max/filament+roller+guide+v2.3mf"
+  ]
+}

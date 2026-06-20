@@ -1,0 +1,233 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "troubleshooting",
+    "source_md": ["01-machine-et-wiki.md", "02-conseils-pieges-forums.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr"
+  },
+  "error_codes": [
+    {"code": "10105", "meaning": "Échec téléchargement / parsing fichier (réseau, mémoire pleine, MD5, fichier corrompu, slicing anormal)", "hint": "Vérifier réseau, stockage interne, re-slicer le fichier."},
+    {"code": "10106", "meaning": "Échec téléchargement / parsing fichier, mémoire pleine", "hint": "Vérifier réseau, stockage interne, re-slicer le fichier."},
+    {"code": "10113", "meaning": "Erreur MD5 / parsing fichier", "hint": "Vérifier réseau, stockage interne, re-slicer le fichier."},
+    {"code": "10115", "meaning": "Fichier corrompu", "hint": "Vérifier réseau, stockage interne, re-slicer le fichier."},
+    {"code": "10116", "meaning": "Slicing anormal", "hint": "Vérifier réseau, stockage interne, re-slicer le fichier."},
+    {"code": "10107", "meaning": "Filament cassé / fin de filament", "hint": "Capteur de rupture (extrudeur) ou détection ACE Pro."},
+    {"code": "10118", "meaning": "Échec homing X", "hint": "Vérifier moteurs, câblage, mécanique."},
+    {"code": "10119", "meaning": "Échec homing Y", "hint": "Vérifier moteurs, câblage, mécanique."},
+    {"code": "10120", "meaning": "Échec homing Z", "hint": "Vérifier moteurs, câblage, mécanique."},
+    {"code": "10121", "meaning": "Plateau : chauffe anormale", "hint": "Vérifier plateau + câblage."},
+    {"code": "10123", "meaning": "Plateau : NTC HS", "hint": "Vérifier plateau + câblage."},
+    {"code": "10122", "meaning": "Hotend : chauffe anormale", "hint": "Vérifier cartouche chauffante ; ⚠️ câble hotend mal inséré (piège connu)."},
+    {"code": "10124", "meaning": "Hotend : NTC HS", "hint": "Vérifier cartouche chauffante ; ⚠️ câble hotend mal inséré (piège connu)."},
+    {"code": "10126", "meaning": "Compensation vibration X anormale", "hint": "Vérifier tension de courroie, accéléromètre."},
+    {"code": "10127", "meaning": "Compensation vibration Y anormale", "hint": "Vérifier tension de courroie, accéléromètre."},
+    {"code": "10128", "meaning": "Compensation vibration X/Y anormale", "hint": "Vérifier tension de courroie, accéléromètre."},
+    {"code": "11801", "meaning": "Spaghetti détecté (IA)", "hint": "Confirmer l'arrêt / vérifier la pièce. ⚠️ Faux positifs possibles (plateau sale, PLA noir/gris, plateaux non-standard)."},
+    {"code": "11812", "meaning": "Spaghetti détecté (IA)", "hint": "Confirmer l'arrêt / vérifier la pièce. ⚠️ Faux positifs possibles."},
+    {"code": "11802", "meaning": "Objet étranger détecté sur le plateau (IA)", "hint": "Nettoyer le plateau."},
+    {"code": "11518", "meaning": "Bourrage / clog ACE Pro (filament bloqué)", "hint": "Redémarrer l'ACE Pro (engrenages en position zéro → libère du jeu) ; sinon ouvrir le capot du buffer (clé Allen 2,5, 2 vis) et repositionner les 4 buffers. Cause fréquente : filament trop fin/mauvaise qualité ou bout coudé non coupé."}
+  ],
+  "common_problems": [
+    {
+      "problem": "Buse bouchée",
+      "symptoms": "Sous-extrusion, pas de débit, bouchons à répétition. La buse 0,2 mm se bouche beaucoup plus facilement.",
+      "escalation": [
+        "1. Chauffer à 250 °C et extruder pour chasser le bouchon.",
+        "2. Déposer le hotend quick-release (gants/pince !), pousser un bout de filament à la main dans la gorge, ou une clé Allen S1.5 longue.",
+        "3. Passer une aiguille dans la buse à 230 °C.",
+        "4. Si rien ne marche, remplacer le hotend quick-release (pas cher, conçu pour)."
+      ],
+      "diagnostic": "Si bouchons à répétition : vérifier buffer mechanism (rebond des 4 buffers) → extrudeur (test E+ à 250 °C, le filament doit traverser le radiateur) → cutter (corps étranger) → gorge (chauffer 150 °C, pousser au filament avec pince) → buse. Penser aussi au cold pull ou au remplacement express via le hotend quick-release (levier latéral, ~10 s sans outil).",
+      "warnings": [
+        "⚠️ Hotend mal clipsé au remontage = la buse racle le plateau.",
+        "⚠️ Câble hotend pas inséré à fond = hotend qui ne chauffe plus.",
+        "⚠️ Gants/pince : risque de brûlure."
+      ],
+      "sources": [
+        "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/cleaning-hotend-clogging",
+        "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/troubleshooting-abnormal-print-head-clogging"
+      ]
+    },
+    {
+      "problem": "Bourrage ACE Pro (CODE 11518 et autres)",
+      "symptoms": "Filament coincé dans l'ACE Pro ou dans le buffer ; engrenages qui patinent ; pause d'impression.",
+      "fix": [
+        "Réflexe n°1 : redémarrer l'ACE Pro (remet les engrenages à zéro, libère un jeu pour tirer le filament).",
+        "Sinon : ouvrir le capot (clé S2.5), tourner l'engrenage à la main en tirant.",
+        "Bourrage dans le buffer : démonter le buffer (clip bleu → tube → capot S2.5 → mécanisme S2.0), remettre les 4 buffers dans une position cohérente, refermer.",
+        "Bourrage profond : démontage de la coque ACE Pro (procédure complète dans le guide)."
+      ],
+      "causes": [
+        "Filament trop fin / de mauvaise qualité (les engrenages patinent).",
+        "Bout de filament coudé / écrasé non coupé avant insertion.",
+        "Filament humide cassé dans le tube → démonter le capot et pousser/retirer le segment.",
+        "Tube PTFE usé/ovalisé."
+      ],
+      "sources": [
+        "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/ace-pro-blocking",
+        "https://wiki.anycubic.com/en/error-codes/11518-code/s1",
+        "https://www.youtube.com/watch?v=e1LnZcfdUEs"
+      ]
+    },
+    {
+      "problem": "Première couche ratée / adhérence",
+      "symptoms": "Zones « fantômes » sur le 1er layer, couche ratée dans un ou plusieurs coins, décollement en cours d'impression.",
+      "fix": [
+        "Imprimer le gcode de test premier layer officiel.",
+        "Vérifier que le hotend quick-release est bien clipsé.",
+        "Nettoyer le plateau (eau + détergent / savon + eau chaude, pas juste l'alcool).",
+        "Préchauffer le plateau 5–10 min à la température d'impression (lit CHAUD : il se dilate, niveler à froid = couche ratée).",
+        "Couche ratée DANS un coin → ce coin est trop loin de la buse → tourner la vis de CE coin d'1/4 de tour anti-horaire (clé Allen S2.0).",
+        "Couche ratée AUX 4 coins → buse globalement trop haute → 4 vis 1/4 tour anti-horaire.",
+        "Re-leveler et réimprimer, lit chaud. Affiner par 1/4 de tours.",
+        "PETG/TPU : bâton de colle sur la plaque (adhérence + couche sacrificielle qui protège le PEI)."
+      ],
+      "diagnostic": "Le leveling auto (jauge de contrainte) ne rattrape pas tout : beaucoup de gens se battent uniquement avec le z-offset alors que le lit se règle avec les 4 vis sous le plateau. Le Z n'a que 2 moteurs et dérive → relancer le nivellement avant les prints importants.",
+      "warnings": [
+        "⚠️ Niveler à froid = première couche ratée.",
+        "⚠️ Le PETG nu peut arracher le revêtement PEI en refroidissant → bâton de colle obligatoire."
+      ],
+      "sources": [
+        "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/first-layer",
+        "https://wiki.anycubic.com/kobra-s1/xy240_pla_0.2_57m4s.gcode"
+      ]
+    },
+    {
+      "problem": "Extrusion irrégulière / clics",
+      "symptoms": "Clic d'extrudeur, sous-extrusion, débit instable (souvent en long print PLA en enceinte fermée).",
+      "fix": [
+        "Astuce communautaire (non officielle, à valider) : serrer à fond la vis droite de l'extrudeur puis la desserrer d'1,5 à 2 tours pour retrouver une tension de pignon correcte.",
+        "Clic + sous-extrusion en long print PLA enceinte fermée = heat creep → ouvrir la porte, vérifier que le ventilateur du heatbreak n'est pas encrassé.",
+        "Bouchon installé : cold pull, ou profiter du hotend quick-release (levier latéral, changement en ~10 s sans outil).",
+        "Calibrer flux + température par filament (tours de température, test de flux) avant les gros prints : la machine est rapide donc punit les profils approximatifs."
+      ],
+      "causes": [
+        "Heat creep (PLA en enceinte fermée + lit chaud : le filament ramollit au-dessus de la zone de fusion).",
+        "Tension de pignon d'extrudeur incorrecte.",
+        "Filament humide.",
+        "Ventilateur de heatbreak encrassé."
+      ],
+      "warnings": [
+        "⚠️ Le réglage de vis d'extrudeur (1,5–2 tours) est une recette communautaire, pas une spec officielle — à valider sur ta machine."
+      ],
+      "sources": [
+        "https://blog.lengoc.me/fixing-common-issues-with-the-kobra-s1-my-first-50-hours-experience/"
+      ]
+    },
+    {
+      "problem": "Purge multi-couleur excessive",
+      "symptoms": "Gaspillage énorme par défaut : un Benchy 4 couleurs de 10,9 g a généré 183 g de purge (17×) ; un print 1 h passé à 9 h ; un masque multicolore à 73 h. Chaque changement de couleur ≈ 2 min.",
+      "fix": [
+        "Flush volume : passer le multiplicateur de 1.0 → ~0.4 (testé OK par la communauté). Garder plus haut pour les transitions critiques (noir → blanc).",
+        "Augmenter le coefficient de purge (flushing) depuis l'interface d'impression seulement si les couleurs bavent sur petites pièces à changements fréquents.",
+        "Activer « flush into infill » (purge dans le remplissage) et/ou purger dans des objets sacrificiels.",
+        "Optimiser l'ordre des couleurs (du foncé vers le clair coûte plus cher en purge que l'inverse)."
+      ],
+      "causes": [
+        "Réglage de flush par défaut trop élevé.",
+        "Nombreux changements de couleur sur petites pièces."
+      ],
+      "warnings": [
+        "⚠️ La valeur de flush 0.4 est une recette communautaire, pas une spec officielle — à valider.",
+        "Le slicer Anycubic n'affiche même pas le filament qui sera gaspillé avant de lancer."
+      ],
+      "sources": [
+        "https://wiki.anycubic.com/en/home/knowledge-sharing/reduce-waste",
+        "https://www.youtube.com/watch?v=i5ce2Ow3F3M"
+      ]
+    },
+    {
+      "problem": "Buse qui racle le plateau",
+      "symptoms": "La buse gratte / racle la surface du plateau.",
+      "fix": [
+        "Vérifier que le hotend quick-release est bien clipsé (cause la plus fréquente).",
+        "Re-niveler, lit chaud."
+      ],
+      "diagnostic": "Souvent hotend mal clipsé après un remontage.",
+      "warnings": ["⚠️ Hotend mal clipsé = la buse racle le plateau."],
+      "sources": ["https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/nozzle-scraping-hot-bed"]
+    },
+    {
+      "problem": "Layer shift (décalage de couches)",
+      "symptoms": "Couches décalées horizontalement.",
+      "fix": [
+        "Vérifier la tension des courroies XY.",
+        "Ne pas pousser les profils au max : la vitesse de croisière propre est ~300 mm/s (600 mm/s = marketing).",
+        "Voir la page dédiée du wiki pour le diagnostic complet."
+      ],
+      "diagnostic": "Vitesse trop poussée, courroies, mécanique. La compensation de vibrations (input shaping) est à relancer après avoir déplacé la machine ou touché à la mécanique.",
+      "warnings": ["⚠️ Vitesse max 600 mm/s = marketing ; ne pas pousser les profils au max pour gagner 10 min."],
+      "sources": ["https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/layer-shift"]
+    },
+    {
+      "problem": "Câble de tête qui frotte le capot",
+      "symptoms": "Bruit : le câble/faisceau de tête frotte contre le capot.",
+      "fix": [
+        "Repositionner le tube PTFE / le faisceau.",
+        "Imprimer le rehausseur de capot fourni par Anycubic sur Makeronline."
+      ],
+      "diagnostic": "",
+      "warnings": [],
+      "sources": ["https://makerworld.com/en/collections/6659265-anycubic-kobra-s1-upgrades"]
+    },
+    {
+      "problem": "Caméra ne s'affiche pas",
+      "symptoms": "La caméra devient parfois inaccessible / l'image ne s'affiche pas.",
+      "fix": [
+        "Un simple redémarrage de la machine la récupère souvent.",
+        "Très dépendant réseau → tester en partage de connexion 4G, puis en mode LAN via le slicer.",
+        "Si LAN OK mais cloud KO → support officiel avec compte + code CN."
+      ],
+      "diagnostic": "Dépendance forte au réseau et au cloud Anycubic ; l'app mobile est jugée boguée et capricieuse. Ne pas compter sur l'app comme canal principal : mode LAN + slicer, ou Rinkhals.",
+      "warnings": ["Pas de vision nocturne (bandeau LED latéral seulement)."],
+      "sources": ["https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/fault-log-export"]
+    },
+    {
+      "problem": "Détection IA faux positifs / AI detection",
+      "symptoms": "La détection spaghetti IA met le print en pause à tort (faux positifs). 2 fausses alertes constatées pendant des tests.",
+      "fix": [
+        "On peut désactiver la détection sur un print critique de nuit si elle se déclenche à tort.",
+        "Garder le firmware à jour : les versions récentes ont amélioré les faux positifs et permettent de régler la sensibilité (depuis V2.5.6.0)."
+      ],
+      "diagnostic": "L'AI detection est un service cloud via l'app (délai de détection normal ; nécessite caméra + réseau + compte app + fonction activée). Tailles mini détectées (sensibilité moyenne) : spaghetti ~3×3×3,8 cm au loin ; objet étranger ~9,5×9,5×3 cm au loin.",
+      "warnings": ["⚠️ Faux positifs possibles sur plateaux non-standard, plateau sale, PLA noir/gris."],
+      "sources": ["https://wiki.anycubic.com/en/home/knowledge-sharing/ai-detection"]
+    },
+    {
+      "problem": "Capteur de fin de filament (runout) capricieux",
+      "symptoms": "Le capteur ne détecte pas le filament inséré → erreurs en boucle dès le début.",
+      "fix": [
+        "Si erreurs de détection persistantes dès le début → SAV Anycubic direct, ils remplacent sans discuter (panne hardware documentée)."
+      ],
+      "diagnostic": "Panne hardware documentée (capteur runout défectueux). Mod possible : relocalisation du capteur runout (collection MakerWorld).",
+      "warnings": [],
+      "sources": ["https://www.creativebloq.com/3d/anycubic-kobra-s1-combo-review-excellent-when-it-works-frustrating-when-it-doesnt"]
+    }
+  ],
+  "firmware_update": {
+    "steps": [
+      "1. Binder l'imprimante à l'app Anycubic (scan QR).",
+      "2. Écran → Settings → Device → Printer information : une flèche sous le n° de version = MAJ dispo → cliquer, OK, puis redémarrer.",
+      "3. L'ACE Pro a son propre firmware : Settings → Device → ACE 1 Information → même principe (×2 si deux ACE).",
+      "Réflexe : mettre à jour le firmware immédiatement au déballage (les premières versions avaient des faux positifs IA et des bugs ACE Pro corrigés depuis)."
+    ],
+    "warning": "⚠️ Impossible de mettre à jour (OTA) en mode LAN — désactiver le LAN mode et lier l'imprimante au cloud Anycubic d'abord, faire la MAJ, puis repasser en LAN si souhaité.",
+    "notable_versions": [
+      {"version": "V2.4.8.3", "changes": "Skip de pièce ratée, flow calibration, 8 couleurs (2× ACE), préchauffe plateau (+5 °C) avant leveling."},
+      {"version": "V2.5.6.0", "changes": "Détection d'objets étrangers, sensibilité IA réglable."},
+      {"version": "V2.5.8.6", "changes": "Support buse 0,2 mm, adaptateur USB→Ethernet."},
+      {"version": "V2.5.9.9", "changes": "Envoi de fichiers depuis OrcaSlicer, support .3mf, M73."},
+      {"version": "V2.7.0.7+", "changes": "Support ACE 2 / V2 (séchage 65 °C), purge multi-couleur améliorée, PLA Silk."},
+      {"version": "V2.7.2.1", "changes": "Dernière vue au 2026-06 : stabilité pause/reprise, reconnaissance ACE améliorée, IA et reprise-après-coupure optimisées."}
+    ]
+  },
+  "sources": [
+    "https://wiki.anycubic.com/en/error-codes",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/firmware-update-guide",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/printer-binding-guide",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting",
+    "https://github.com/jbatonnet/Rinkhals",
+    "https://github.com/MPC561/Anycubic-Kobra-S1-Orcaslicer-Profiles"
+  ]
+}

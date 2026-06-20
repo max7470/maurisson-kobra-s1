@@ -1,0 +1,30 @@
+# ⚙️ Mécanique fascinante — les prints « impossibles sans impression 3D »
+
+> Sélection pour la **Anycubic Kobra S1 Combo + ACE Pro**. Le genre de mécanisme qu'on pose sur son bureau et qui force un ingénieur à demander « attends… comment c'est fabriqué, ça ? ».
+>
+> **Note ACE Pro (mono-buse)** : le tag **[MULTI]** signale les modèles qui exploitent bien le multi-couleur **sans purge délirante** — en général parce que les pièces s'impriment **séparément** (une couleur par pièce/plaque = zéro purge) ou par grandes zones. Les print-in-place mono-couleur restent les rois du rendement filament.
+
+| # | Modèle | Lien | Pourquoi c'est cool | Difficulté / temps |
+|---|--------|------|---------------------|--------------------|
+| 1 | Easy Strandbeest (LoboCNC) | https://makerworld.com/en/models/431313-easy-strandbeest | Une machine de Theo Jansen qui MARCHE au vent d'un simple ventilo : jambes print-in-place pré-assemblées, vilebrequin monolithique — biomécanique pure. | Moyen / ~12-15 h |
+| 2 | Print In Place Platform Jack (ATECH) | https://www.thingiverse.com/thing:937421 | LE classique absolu : un cric à ciseaux complet avec vis sans fin qui sort fonctionnel du plateau, sans une seule vis ajoutée — impossible à usiner autrement. | Facile / ~5-7 h |
+| 3 | Three Heart Gears (emmett) | https://www.thingiverse.com/thing:243278 | Le cœur-engrenage iconique de Thingiverse : un cube d'engrenages obliques qui redevient un cœur parfait à chaque tour de manivelle. **[MULTI]** (chaque engrenage = une couleur, pièces séparées → zéro purge) | Moyen / ~6-8 h + assemblage |
+| 4 | Maltese/Geneva mechanism print-in-place (Michal) | https://makerworld.com/en/models/741092-maltese-geneva-mechanism-print-in-place | Le mécanisme de Genève (croix de Malte) qui transforme une rotation continue en pas indexés — le cœur des projecteurs cinéma, en fidget print-in-place. | Facile / ~2 h |
+| 5 | Constant Mesh 3 Speed Gearbox with Reverse Gear | https://makerworld.com/en/models/71162-constant-mesh-3-speed-gearbox-with-reverse-gear | Une vraie boîte de vitesses 3 rapports + marche arrière avec crabots coulissants : on passe les vitesses à la main, hypnotique en démo commerciale. **[MULTI]** (pignons/carter en couleurs distinctes, pièces séparées) | Moyen / ~8-10 h + assemblage |
+| 6 | Planetary Gears Finger Fidget Spinners | https://makerworld.com/en/models/654785-planetary-gears-finger-fidget-spinners | Train épicycloïdal complet (soleil + 6 satellites + couronne) print-in-place en 15 g de filament : la leçon d'engrenages planétaires qui tient dans la poche. | Très facile / ~1 h 30 |
+| 7 | Gyroscope Fidget Toy print-in-place (gary niu) | https://www.printables.com/model/369134-gyroscope-fidget-toy-print-in-place | Un gyroscope à cardans imbriqués imprimé d'un bloc en 30 minutes : on casse les anneaux libres et ça tourne sur 3 axes. | Très facile / ~30 min |
+| 8 | Radial engine print-in-place | https://makerworld.com/en/models/728834-radial-engine-print-in-place | Un moteur en étoile dont les pistons montent et descendent quand on tourne l'hélice — sorti quasi tel quel du plateau (un seul support à retirer). | Facile / ~3-4 h |
+| 9 | 2-digit 7 Segment Mechanical Counter Display | https://makerworld.com/en/models/825857-2-digit-7-segment-mechanical-counter-display | Un afficheur 7 segments 100 % mécanique à cames : on actionne, les segments se reconfigurent chiffre par chiffre — magie d'ingénieur garantie. **[MULTI]** (segments contrastés vs corps, pièces séparées) | Moyen / ~6-8 h + assemblage |
+| 10 | Marbevator, Simple (gzumwalt) | https://www.printables.com/model/602988-marbevator-simple | Une machine à billes en boucle infinie signée gzumwalt, le maître des automates imprimés (100+ modèles) : la bille remonte, redescend, recommence. | Facile / ~4-5 h |
+| 11 | Inchworm Caterpillar Automaton (JKHE) | https://makerworld.com/en/models/468733-inchworm-caterpillar-automaton | Automate à manivelle : une chenille arpenteuse qui rampe en cercle sur sa feuille — la poésie des automates japonais, version FDM. **[MULTI]** (chenille/feuille/socle en couleurs séparées) | Facile / ~4 h |
+| 12 | Lock Puzzle – Cryptex (FLEX.53) | https://makerworld.com/en/models/621649 | Un cryptex façon Da Vinci Code à code 4 chiffres personnalisable : la boîte à secret mécanique parfaite pour offrir un cadeau (ou des clés USB confidentielles). **[MULTI]** (anneaux chiffrés en couleur contrastée, pièces séparées) | Facile / ~4-5 h |
+| 13 | Impossible Tensegrity Table (JonasM) | https://makerworld.com/en/models/143106-impossible-tensegrity-table | Une table qui « flotte » retenue uniquement par des fils en tension : la sculpture anti-gravité qui déclenche systématiquement un débat de physique au bureau. | Facile / ~3-4 h + 3 fils |
+| 14 | Rubber Band Powered Plane – Adjustable Wings | https://makerworld.com/en/models/2673555-rubber-band-powered-plane-adjustable-wings | Un avion à hélice élastique imprimé en ~35 minutes qui vole 2× plus loin qu'un avion en papier — ailes réglables pour trimmer le vol. **[MULTI]** (fuselage/ailes/hélice, 5 pièces séparées) | Très facile / ~35 min |
+| 15 | Perpetual Marble Machine (Ambrosechan) | https://makerworld.com/en/models/1063810 | Sculpture cinétique de bureau : un mécanisme bielle-manivelle fait onduler les rails et la bille circule sans fin — le « screensaver physique » ultime. | Moyen / ~6-8 h |
+
+## Conseils Kobra S1 + ACE Pro pour ce thème
+
+- **Print-in-place = tolérances** : plateau bien dégraissé, première couche nickel, et éviter l'elephant foot (sinon les mécanismes sont soudés). Les n° 2, 4, 6, 7, 8 sont les meilleurs tests.
+- **Zéro purge en multi-couleur** : pour les modèles à pièces séparées (n° 3, 5, 9, 11, 12, 14), assigner **une couleur par pièce et lancer les pièces par plaques mono-couleur** — l'ACE Pro sert de magasin de bobines, pas de mélangeur, et la purge tombe à zéro.
+- **PLA conseillé** pour la rigidité des engrenages et jambes de strandbeest (recommandation explicite de LoboCNC) ; PETG pour ce qui doit encaisser (cric, manivelles).
+- Les liens ont été vérifiés par recherche web le 2026-06-10.

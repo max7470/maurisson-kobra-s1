@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "title": "Bible machine — Anycubic Kobra S1 Combo + ACE Pro",
+    "role": "manifest / index d'entrée pour agents IA et humains",
+    "owner": "Maxime (Maurisson)",
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "last_research": "2026-06-10",
+    "compiled": "2026-06-20",
+    "lang": "fr",
+    "schema_version": 1,
+    "how_to_use": "Lis ce manifest pour t'orienter. Chaque domaine de connaissance est dans un fichier data/*.json autoportant et requêtable. Charge UNIQUEMENT le(s) fichier(s) pertinent(s) à la question posée (voir 'files' ci-dessous). Les 'quick_facts' et 'golden_rules' suffisent pour répondre aux questions de base sans rien charger d'autre.",
+    "linked_lab": "À rattacher au Labo 3D de Maurisson (skill maurisson-3d)"
+  },
+
+  "quick_facts": {
+    "type": "Imprimante FDM CoreXY caisson fermé + module multicouleur ACE Pro (4 bobines, séchage actif)",
+    "build_volume_mm": [250, 250, 250],
+    "nozzle_max_c": 320,
+    "bed_max_c": 120,
+    "nozzle_default": "0,4 mm quick-release (démontable à la main au levier) ; 0,2 mm supporté depuis FW V2.5.8.6",
+    "speed": "300 mm/s recommandé, 600 mm/s max (marketing) ; croisière propre réelle ~200-300 mm/s",
+    "plate": "PEI acier ressort texturé, flexible",
+    "wifi": "2,4 GHz UNIQUEMENT (pas de 5 GHz)",
+    "slicer": "Anycubic Slicer Next (fork OrcaSlicer) ; OrcaSlicer en réseau direct seulement via firmware Rinkhals",
+    "ace_pro": "4 slots, séchage actif jusqu'à 55 °C même pendant l'impression ; PAS de capteur d'humidité (v1) ; chaînable à 8 couleurs (2 ACE)",
+    "firmware_latest_seen": "V2.7.2.1 (juin 2026)",
+    "top_mod": "Rinkhals (firmware overlay réversible : Klipper/Moonraker/Mainsail/Fluidd, caméra, SSH, sortie du cloud, Orca réseau)"
+  },
+
+  "golden_rules": [
+    "DÉBALLAGE : retirer les 6 vis de transport (flèches rouges) AVANT la 1re mise sous tension, sinon casse moteur.",
+    "TPU : JAMAIS via l'ACE Pro (se vrille/bourre) → bobine sur le porte-bobine arrière, en direct, dureté ≥ 95A. On peut le SÉCHER dans l'ACE (55 °C) puis le sortir.",
+    "FIBRÉS (PLA-CF/GF, carbone, verre) : interdits dans l'ACE Pro (usure des canaux) → tube arrière + buse acier trempé.",
+    "PLA / PETG : porte et/ou capot OUVERTS sur les longs prints (enceinte fermée = heat creep, sous-extrusion, bouchon). Enceinte fermée réservée à l'ABS/ASA/PC.",
+    "PLATEAU : laver au savon+eau avant le 1er print et régulièrement ; ne jamais toucher la surface avec les doigts (gras = défaut d'adhérence).",
+    "PETG/TPU/PC/PA : voile de bâton de colle sur le PEI = adhérence ET protège le revêtement (le PETG nu peut arracher le PEI).",
+    "AXE X : JAMAIS de graisse (paliers graphène autolubrifiants) — alcool seulement. Vis Z : graisse (pas d'huile/WD-40).",
+    "MULTICOULEUR : l'ACE Pro est mono-buse → chaque changement purge (~2 min + déchet). Baisser le flush multiplier à 0,4-0,6, activer 'flush into infill', regrouper les couleurs par zone/hauteur, batcher.",
+    "FIRMWARE + RINKHALS : ne JAMAIS accepter une MAJ Anycubic sans vérifier qu'une release Rinkhals la supporte. MAJ officielle d'abord, réinstaller Rinkhals ensuite.",
+    "MAJ firmware : impossible en mode LAN — il faut binder l'app/cloud Anycubic d'abord.",
+    "BOBINES dans l'ACE : plastique uniquement (195-200 mm Ø) ; carton = poussière + glisse + détection capricieuse → tube arrière ou bague d'adaptation."
+  ],
+
+  "files": [
+    {
+      "path": "data/printer.json",
+      "topic": "Spécifications machine + ACE Pro",
+      "use_when": "Questions sur les specs, capacités, fonctionnement de l'ACE Pro (chargement, RFID, séchage, limites, filament backup, 8 couleurs), ventilateurs, connectivité.",
+      "top_keys": ["summary", "specs", "fans", "connectivity", "ace_pro", "sources"]
+    },
+    {
+      "path": "data/calibration.json",
+      "topic": "Calibrations",
+      "use_when": "Auto-leveling, flow calibration / pressure advance, input shaping, fix manuel de la première couche, ordre de calibration recommandé, températures plateau/buse par matériau.",
+      "top_keys": ["auto_leveling", "flow_calibration", "input_shaping", "first_layer_manual_fix", "recommended_order", "bed_and_temps", "sources"]
+    },
+    {
+      "path": "data/maintenance.json",
+      "topic": "Plan de maintenance",
+      "use_when": "Entretien périodique de la machine et de l'ACE Pro (vis Z, tiges, cutter, hotend, PTFE, buffer...), fréquences, méthode, interdits.",
+      "top_keys": ["printer", "ace_pro", "notes", "sources"]
+    },
+    {
+      "path": "data/troubleshooting.json",
+      "topic": "Pannes, codes d'erreur, fixes",
+      "use_when": "Un code d'erreur précis, buse bouchée, bourrage ACE Pro, première couche ratée, extrusion irrégulière, purge excessive, layer shift, caméra, IA, mise à jour firmware.",
+      "top_keys": ["error_codes", "common_problems", "firmware_update", "sources"]
+    },
+    {
+      "path": "data/consumables.json",
+      "topic": "Consommables & pièces à stocker",
+      "use_when": "Quoi avoir d'avance (buses, manchons, PTFE, filtre charbon, colle, plaque PEI, dessicant), où acheter.",
+      "top_keys": ["items", "where_to_buy", "sources"]
+    },
+    {
+      "path": "data/materials.json",
+      "topic": "Guide des filaments (10 matériaux)",
+      "use_when": "Choisir/régler un filament : PLA (+variantes), PETG, ABS, ASA, TPU, Nylon/PA, PC, CF, HIPS, PVA. Températures, compatibilité ACE, séchage, prix EU/Belgique, marques, pièges d'achat, kit de démarrage.",
+      "top_keys": ["machine_constraints", "materials", "summary_table", "starter_kit_belgium", "buying_pitfalls", "sources"]
+    },
+    {
+      "path": "data/slicer.json",
+      "topic": "Slicer, profils, vitesses, purge, séchage",
+      "use_when": "Anycubic Slicer Next vs OrcaSlicer, connecter Orca (3 options), profils communautaires (MPC561), vitesses réelles, optimisation de la purge multicouleur, TPU, séchage dans l'ACE.",
+      "top_keys": ["strategy_tldr", "asn_vs_orca", "connect_to_orca", "orca_profiles", "speeds", "multicolor_purge", "tpu_and_ace", "ace_drying", "sources"]
+    },
+    {
+      "path": "data/mods.json",
+      "topic": "Mods, firmware custom, upgrades",
+      "use_when": "Rinkhals (install/désinstall/garantie/compat firmware), sortir du cloud, Orca en réseau, Home Assistant, mods imprimables (ACE Pro, PTFE, châssis, + 15 mods machine spécifiques S1 dans printable_mods.machine_specific_s1), upgrades qui valent le coup vs gadgets, checklist de mise en œuvre.",
+      "top_keys": ["rinkhals", "exit_cloud", "orca_network", "home_assistant", "printable_mods", "tuning_notes", "upgrades_worth_it", "upgrades_gadgets_avoid", "implementation_checklist", "uncertainties", "sources"]
+    },
+    {
+      "path": "data/models.json",
+      "topic": "Catalogue de modèles à imprimer (dédupliqué, vagues 1 à 6 + Bug-A-Salt)",
+      "use_when": "Trouver quoi imprimer : 616 modèles taggés (catégorie, multicolore/purge, supports, matériau, temps, difficulté) + 11 systèmes modulaires + 10 raccourcis de recherche + 8 modèles de calibration. Filtrer par 'categories', 'ace_pro_friendly', 'difficulty', 'material'. Les notes de thème des vagues sont dans 'theme_notes'.",
+      "top_keys": ["purge_principle", "categories", "models", "systems", "search_shortcuts", "calibration_models", "first_week_order", "ace_pro_print_tips", "theme_notes", "sources"],
+      "counts": {"models": 616, "systems": 11, "search_shortcuts": 10, "calibration_models": 8},
+      "categories": ["airbnb", "animals", "auto_moto", "bar", "bugasalt", "coffee_tea", "cosplay", "deco_lighting", "electronics_maker", "gaming", "gifts", "home", "kids_school", "kitchen", "mechanical", "multicolor", "music", "photo_video", "plants", "repairs", "seasonal", "sewing_creative", "sport_outdoor", "toys", "travel_edc", "workshop_outdoor"]
+    }
+  ],
+
+  "human_guide": {
+    "path": "guide/",
+    "note": "Versions prose lisibles (markdown) des mêmes connaissances, pour lecture humaine. La source de vérité requêtable reste data/*.json.",
+    "model_prose": "guide/modeles/"
+  },
+
+  "other_assets": {
+    "etude-achat-comparatif/": "3 PDF : dossier comparatif imprimantes multicouleurs, étude complète Kobra S1 Combo, duel Kobra S1 vs Centauri Carbon 2 (+ scripts build_*.py et photos).",
+    "photos-modeles/": "Vignettes des modèles à imprimer.",
+    "tools/": "Scripts utilitaires (fetch_photos.py)."
+  }
+}

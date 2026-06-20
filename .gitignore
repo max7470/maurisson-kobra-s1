@@ -1,0 +1,9 @@
+# OS / éditeurs
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*~
+
+# Sauvegardes locales
+*.bak-*

@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "consumables",
+    "source_md": ["02-conseils-pieges-forums.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr"
+  },
+  "items": [
+    {
+      "part": "Buses 0,4 mm (hotend quick-release Kobra S1, laiton)",
+      "why": "Usure normale + bouchons ; le swap prend 10 s",
+      "note": "Prendre le hotend complet pré-assemblé Anycubic, c'est le format prévu. 1-2 d'avance. Une 0,6 mm en plus pour les gros prints rapides."
+    },
+    {
+      "part": "Manchons silicone de buse",
+      "why": "Consommable officiel, se déchire avec le temps",
+      "note": "Guide remplacement : https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/nozzle-silicone-replacement-guide"
+    },
+    {
+      "part": "Module wiper / brosse silicone de nettoyage buse",
+      "why": "Pièce d'usure désignée comme telle par Anycubic",
+      "note": "Dispo boutique Anycubic / 3DJake."
+    },
+    {
+      "part": "Tube PTFE + coupleurs",
+      "why": "Le chemin ACE Pro→tête use le PTFE ; un tube ovalisé = frottements et bourrages",
+      "note": "Quelques mètres de PTFE 1,75 mm de qualité (type Capricorn)."
+    },
+    {
+      "part": "Filtre à charbon actif",
+      "why": "À remplacer périodiquement (ABS/ASA surtout)",
+      "note": "Boutique Anycubic."
+    },
+    {
+      "part": "Bâtons de colle (PVP type Magigoo/UHU)",
+      "why": "Obligatoire PETG/TPU pour protéger la plaque",
+      "note": "Conso rapide."
+    },
+    {
+      "part": "Plaque PEI de rechange",
+      "why": "Le PEI finit toujours par s'user/s'arracher",
+      "note": "Pas urgent jour 1, mais à prévoir."
+    },
+    {
+      "part": "Dessicant rechargeable + hygromètre",
+      "why": "L'ACE Pro sèche (45-55 °C) mais ne stocke pas hermétiquement parfaitement ; filament humide = cassures dans les tubes = pire panne ACE Pro",
+      "note": "Sachets silica gel à recharger au four."
+    },
+    {
+      "part": "Clés Allen 2,0 et 2,5",
+      "why": "Fournies, mais ce sont les 2 tailles de toutes les interventions (vis de lit, capot buffer ACE)",
+      "note": "Les garder près de la machine."
+    }
+  ],
+  "where_to_buy": [
+    {"label": "boutique officielle Kobra S1", "url": "https://store.anycubic.com/collections/accessories-for-kobra-s1-combo"},
+    {"label": "3DJake (Belgique)", "url": "https://www.3djake.com/spareparts/ersatzteile-fuer-anycubic-kobra-s1"},
+    {"label": "Amazon"}
+  ],
+  "sources": [
+    "https://store.anycubic.com/collections/accessories-for-kobra-s1-combo",
+    "https://www.3djake.com/spareparts/ersatzteile-fuer-anycubic-kobra-s1",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/nozzle-silicone-replacement-guide"
+  ]
+}

@@ -1,0 +1,630 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "materials",
+    "source_md": ["06-guide-filaments.md"],
+    "last_research": "2026-06-10",
+    "region": "Belgique/EU",
+    "lang": "fr",
+    "machine_reference": "Anycubic Kobra S1 Combo — CoreXY fermée, buse jusqu'à 320 °C (gorge céramique), plateau PEI texturé jusqu'à 120 °C, extrudeur direct drive, ACE Pro 4 bobines (séchage 55 °C max).",
+    "price_note": "Prix relevés juin 2026, boutiques EU livrant en Belgique (Bambu Lab EU, Anycubic EU, 3DJake.be, Amazon.fr/.be/.de, stores eSun/Sunlu EU). Les prix « promo » des stores chinois (Anycubic, Sunlu) sont quasi permanents — c'est le prix barré qui est fictif. Fourchettes TVA comprise."
+  },
+  "machine_constraints": [
+    "TPU et filaments fibrés (CF/GF) INTERDITS dans l'ACE Pro → mono-bobine par le tube arrière uniquement (TPU ≥ 95A).",
+    "PLA / PETG en enceinte fermée = porte et/ou capot OUVERTS (heat creep sinon).",
+    "ABS / ASA = porte fermée (l'enceinte est un atout majeur de la S1).",
+    "Bobines carton déconseillées dans l'ACE (poussière, accroche, détection)."
+  ],
+  "materials": [
+    {
+      "id": "pla",
+      "name": "PLA",
+      "tagline": "le pain quotidien",
+      "use_cases": "LE matériau par défaut, ~80 % des impressions d'un débutant : objets déco, figurines, prototypes, jouets, supports de bureau, boîtes, pièces d'organisation (Gridfinity), cosplay, maquettes. Tout ce qui vit à l'intérieur et ne chauffe pas.",
+      "examples": [
+        "organiseurs de tiroir",
+        "supports casque/téléphone",
+        "figurines peintes",
+        "prototypes de pièces avant retirage en PETG/ASA",
+        "calibration de la machine"
+      ],
+      "pros": [
+        "Le plus facile à imprimer, quasi zéro warping",
+        "Pas cher, énorme choix de couleurs",
+        "Sans odeur, biosourcé",
+        "Détails fins superbes, ponts propres"
+      ],
+      "cons": [
+        "Ramollit dès ~55-60 °C (voiture en été = pièce fondue)",
+        "Cassant (rupture nette, pas de déformation)",
+        "Mauvaise tenue UV/extérieur long terme",
+        "Se dégrade à l'humidité sur des mois"
+      ],
+      "nozzle_c": "190-220 (215 bon point de départ)",
+      "bed_c": "55-65",
+      "ace_pro": "oui",
+      "ace_pro_note": "c'est le matériau roi du multi-couleurs",
+      "enclosure": "porte/capot OUVERTS (heat creep en enceinte chaude)",
+      "drying": "rarement nécessaire neuf ; si bobine entamée depuis des mois → 45-50 °C 4-6 h. L'ACE à 55 °C suffit largement.",
+      "ace_drying_ok": "oui",
+      "difficulty": "⭐ Débutant absolu",
+      "price_eur_kg": {
+        "entry": "12-17",
+        "mid": "17-23",
+        "premium": "25-30"
+      },
+      "price_detail": {
+        "entry": "12-17 € (eSun, Sunlu, Anycubic PLA Basic 15,99 €, Bambu PLA Basic 11,50 € en bulk 4+, ~17-20 € à l'unité)",
+        "mid": "17-23 € (eSun PLA+, Anycubic PLA+ 16,99 €, Polymaker PolyTerra ~20 €)",
+        "premium": "25-30 € (Prusament PLA 29,99 €)"
+      },
+      "brands": [
+        {"name": "Bambu Lab PLA Basic", "note": "imbattable en bulk (11,50 €), bobine plastique nickel pour l'ACE, qualité très constante."},
+        {"name": "eSun PLA+", "note": "le classique robuste, légèrement plus tenace que le PLA standard, ~15-18 € sur Amazon."},
+        {"name": "Polymaker PolyTerra", "note": "fini mat superbe, démarche éco, ~20 €. ⚠️ bobine carton → à respooler ou réserver au tube arrière."}
+      ],
+      "tips": [
+        "Plateau PEI texturé : aucune colle nécessaire, juste dégraisser au liquide vaisselle de temps en temps. L'IPA seul finit par étaler le gras.",
+        "Premier layer : 220/60 °C, ensuite 210-215 °C.",
+        "Stockage : boîte + sachets dessicants suffisent. Le PLA pardonne beaucoup.",
+        "En enceinte fermée pour une grosse pièce de 10 h+ : entrouvre au moins le capot, sinon heat creep et bouchage en milieu de print."
+      ],
+      "variants": [
+        {"name": "PLA Mat (Matte)", "use": "Déco haut de gamme, cache les lignes de couches", "specifics": "Identique au PLA, légèrement plus cassant", "price": "18-24 € (Anycubic Matte 19,99 €, Bambu Matte 11,50 € bulk)"},
+        {"name": "PLA Silk", "use": "Vases, déco brillante, cadeaux", "specifics": "Imprimer plus chaud (215-230 °C) et plus lent, couches moins soudées = pièces fragiles", "price": "19-25 € (Anycubic Silk 19,99 €)"},
+        {"name": "PLA High-Speed", "use": "Profite des 600 mm/s de la S1", "specifics": "Formulé pour fondre vite ; le choix logique sur CoreXY rapide", "price": "17-22 € (Anycubic HS 18,99 €)"},
+        {"name": "PLA Bois (Wood)", "use": "Objets « bois » ponçables, déco rustique", "specifics": "Fibres de bois = abrasif léger + risque de bouchage : buse ≥ 0,6 mm conseillée, ⚠️ éviter l'ACE (cassant + particules), tube arrière", "price": "25-30 € (Bambu PLA Wood 27,99 €)"},
+        {"name": "PLA Glow", "use": "Phosphorescent (interrupteurs, déco enfants)", "specifics": "Abrasif (particules de strontium) : buse acier, pas de longues séries avec buse laiton", "price": "22-28 € (Anycubic Glow 23,99 €)"},
+        {"name": "PLA Arc-en-ciel / Gradient / Galaxy", "use": "Vases, déco, surprise de couleur", "specifics": "Aucun réglage spécial ; transition de couleur sur plusieurs dizaines de mètres → réservé aux grosses pièces", "price": "20-28 € (Anycubic Silk Rainbow ~20 €, Bambu Gradient 27,99 €)"}
+      ],
+      "sources": [
+        {"label": "Bambu Lab EU", "url": "https://eu.store.bambulab.com/collections/bambu-lab-3d-printer-filament"},
+        {"label": "Anycubic EU", "url": "https://eu.anycubic.com/collections/filaments"},
+        {"label": "Amazon.fr eSun PLA+", "url": "https://www.amazon.fr/eSUN-Pr%C3%A9cision-Dimensionnelle-Cartouche-Imprimante/dp/B07FQ98RNP"},
+        {"label": "Sunlu store EU", "url": "https://fr.store.sunlu.com/en/collections/pla-filament"}
+      ]
+    },
+    {
+      "id": "petg",
+      "name": "PETG",
+      "tagline": "le costaud d'extérieur facile",
+      "use_cases": "Le deuxième matériau à avoir. Pièces fonctionnelles, extérieur, contact avec l'eau, légère flexibilité.",
+      "examples": [
+        "pots de fleurs et jardinières extérieures",
+        "supports d'arrosage",
+        "pièces de vélo non structurelles",
+        "crochets de garage",
+        "boîtiers électroniques",
+        "gabarits d'atelier",
+        "pièces sous capot léger (hors moteur)",
+        "gamelles d'animaux (PETG = base des bouteilles alimentaires — mais l'impression 3D n'est jamais 100 % food-safe à cause des micro-sillons)"
+      ],
+      "pros": [
+        "Résiste à ~75-80 °C, à l'eau, aux UV bien mieux que le PLA",
+        "Tenace, plie avant de casser",
+        "Couches très soudées = pièces solides",
+        "Pas d'enceinte requise"
+      ],
+      "cons": [
+        "Stringing (cheveux d'ange) difficile à éliminer totalement",
+        "Ponts et surplombs moins propres que le PLA",
+        "Colle TROP bien au PEI → peut arracher le revêtement",
+        "Hygroscopique (séchage souvent utile)"
+      ],
+      "nozzle_c": "230-250",
+      "bed_c": "70-80",
+      "ace_pro": "oui",
+      "enclosure": "porte/capot OUVERTS (ou entrouverts) — même logique que le PLA",
+      "drying": "recommandé dès que la bobine traîne. 55 °C de l'ACE = limite basse mais OK en allongeant la durée (6-8 h au lieu de 4). L'idéal PETG est 65 °C → un dryer externe fait mieux, mais l'ACE dépanne très bien.",
+      "ace_drying_ok": "limite",
+      "difficulty": "⭐⭐ Débutant+ (après 2-3 bobines de PLA)",
+      "price_eur_kg": {
+        "entry": "13-17",
+        "mid": "17-25",
+        "premium": "25-30"
+      },
+      "price_detail": {
+        "entry": "13-17 € (Anycubic PETG 14,99 €, Bambu PETG HF 11,50 € bulk, Sunlu/eSun ~13-18 €)",
+        "mid": "17-25 € (Bambu PETG Translucent, eSun PETG couleurs spéciales)",
+        "premium": "~25-30 € (Prusament PETG ~25-30 €)"
+      },
+      "brands": [
+        {"name": "Bambu PETG HF (High Flow)", "note": "pensé pour les CoreXY rapides, 11,50 € en bulk : le meilleur rapport qualité/prix du moment."},
+        {"name": "Anycubic PETG", "note": "14,99 €, profils tout faits dans le slicer Anycubic, valeur sûre sur la S1."},
+        {"name": "eSun PETG", "note": "vétéran fiable, transparents corrects, large dispo Amazon.be/.de."}
+      ],
+      "tips": [
+        "🔴 Protège ton PEI : soit un voile de bâton de colle (couche de séparation, pas d'adhérence !), soit Z-offset un poil plus haut. Un PETG chaud sur PEI nu peut arracher des morceaux de revêtement au décollage.",
+        "Stringing : sèche le filament, monte la rétraction (~1-2 mm direct drive), active « wipe » et baisse la température de 5-10 °C.",
+        "Laisse refroidir le plateau avant de décoller : à froid, la pièce saute toute seule.",
+        "Ventilation pièce : 30-50 % max, pas 100 % comme le PLA."
+      ],
+      "sources": [
+        {"label": "Bambu Lab EU", "url": "https://eu.store.bambulab.com/collections/bambu-lab-3d-printer-filament"},
+        {"label": "Anycubic EU", "url": "https://eu.anycubic.com/collections/filaments"},
+        {"label": "Sunlu EU", "url": "https://fr.store.sunlu.com/"}
+      ]
+    },
+    {
+      "id": "abs",
+      "name": "ABS",
+      "tagline": "le technique old-school",
+      "use_cases": "Pièces mécaniques qui chauffent, post-traitement vapeur d'acétone (surface lisse brillante), pièces à visser/tarauder.",
+      "examples": [
+        "boîtiers électroniques qui chauffent",
+        "engrenages peu sollicités",
+        "pièces Lego-like",
+        "supports moteur de petits appareils",
+        "pièces lissées à l'acétone pour un fini injection"
+      ],
+      "pros": [
+        "Tient ~95-100 °C",
+        "Usinable, ponçable, lissable à l'acétone",
+        "Pas cher pour un matériau technique",
+        "Bonne résistance aux chocs"
+      ],
+      "cons": [
+        "Warping sérieux sans enceinte (la S1 règle ça)",
+        "Fumées styrène : pièce ventilée obligatoire, jamais dans une chambre",
+        "Rétractation = précision dimensionnelle délicate",
+        "UV : jaunit et devient cassant dehors → préférer l'ASA"
+      ],
+      "nozzle_c": "240-270",
+      "bed_c": "90-100",
+      "ace_pro": "oui",
+      "ace_pro_note": "matériau rigide standard",
+      "enclosure": "porte FERMÉE, capot fermé — c'est exactement pour ça que tu as une CoreXY fermée",
+      "drying": "idéal 70-80 °C → l'ACE à 55 °C est insuffisant pour un vrai séchage ABS ; en pratique l'ABS est peu hygroscopique, 55 °C × 8 h dépanne. Dryer externe utile si bobine vraiment humide.",
+      "ace_drying_ok": "limite",
+      "difficulty": "⭐⭐⭐ Intermédiaire",
+      "price_eur_kg": {
+        "entry": "14-20",
+        "mid": "20-25"
+      },
+      "price_detail": {
+        "entry": "14-20 € (Bambu ABS 11,50 € bulk / ~17 € unitaire, eSun ABS+ ~15-18 €)",
+        "mid": "20-25 € (Anycubic ABS 21,99 €, Polymaker PolyLite ABS ~20-23 €)"
+      },
+      "brands": [
+        {"name": "eSun ABS+", "note": "rétractation réduite vs ABS classique, le plus tolérant pour débuter l'ABS."},
+        {"name": "Bambu ABS", "note": "prix bulk imbattable, très constant."},
+        {"name": "Polymaker PolyLite ABS", "note": "odeur réduite, bon compromis."}
+      ],
+      "tips": [
+        "Préchauffe l'enceinte : lance le plateau à 100 °C 10-15 min porte fermée avant le print.",
+        "Brim 5-8 mm quasi systématique sur pièces > 5 cm.",
+        "Ventilation couches : 0-20 % max.",
+        "Pièce ventilée, pas la chambre/bureau fermé où tu dors. Un purificateur ou une fenêtre entrouverte pendant le print.",
+        "Honnêtement : sur cette machine, l'ASA fait tout ce que fait l'ABS en mieux sauf le prix. L'ABS reste pour le budget et le lissage acétone."
+      ]
+    },
+    {
+      "id": "asa",
+      "name": "ASA",
+      "tagline": "le roi de l'extérieur",
+      "use_cases": "L'ABS moderne : mêmes propriétés mécaniques + résistance UV réelle. LE matériau extérieur définitif.",
+      "examples": [
+        "pièces automobiles (caches rétro, clips de carrosserie, supports de plaque, accessoires de tableau de bord)",
+        "supports d'antenne/caméra extérieure",
+        "fixations de panneaux solaires 😉",
+        "pièces de jardin permanentes",
+        "boîtiers météo",
+        "drones"
+      ],
+      "pros": [
+        "Tenue UV/intempéries excellente (ne jaunit pas)",
+        "~95-100 °C de tenue thermique",
+        "Warping un peu moindre que l'ABS",
+        "Beau fini mat"
+      ],
+      "cons": [
+        "Mêmes contraintes que l'ABS (enceinte, fumées)",
+        "Plus cher que l'ABS",
+        "Choix de couleurs plus limité"
+      ],
+      "nozzle_c": "240-270 (Anycubic annonce 255-275 °C pour le sien)",
+      "bed_c": "90-100",
+      "ace_pro": "oui",
+      "enclosure": "porte FERMÉE + capot fermé",
+      "drying": "comme l'ABS — idéal 70-80 °C, ACE 55 °C = dépannage, peu critique car ASA peu hygroscopique",
+      "ace_drying_ok": "limite",
+      "difficulty": "⭐⭐⭐ Intermédiaire",
+      "price_eur_kg": {
+        "entry_mid": "20-28",
+        "premium": "30-37"
+      },
+      "price_detail": {
+        "entry_mid": "20-28 € (Anycubic ASA 23,99 €, Bambu ASA 24,99 €)",
+        "premium": "30-37 € (Prusament ASA ~30 € la bobine de 850 g ≈ 35 €/kg, Polymaker PolyLite ASA ~25-30 €)"
+      },
+      "brands": [
+        {"name": "Anycubic ASA", "note": "23,99 € — profil natif dans le slicer, logique sur une S1."},
+        {"name": "Polymaker PolyLite ASA", "note": "référence qualité/constance, légèrement plus cher."},
+        {"name": "Bambu ASA", "note": "24,99 € — très bon, bobine plastique parfaite pour l'ACE."}
+      ],
+      "tips": [
+        "Mêmes réflexes que l'ABS : enceinte préchauffée, brim, ventilation 0-20 %, pièce aérée.",
+        "Pour les pièces auto sous capot proche moteur : l'ASA tient l'habitacle et la carrosserie, pas le compartiment moteur chaud (là c'est PC ou PA-CF).",
+        "Smoothing possible à l'acétone aussi (moins efficace que l'ABS)."
+      ]
+    },
+    {
+      "id": "tpu_95a",
+      "name": "TPU 95A",
+      "tagline": "le flexible",
+      "use_cases": "Pièces souples et amortissantes.",
+      "examples": [
+        "coques de téléphone",
+        "joints",
+        "pieds anti-vibration (machine à laver, imprimante !)",
+        "protections d'angles",
+        "roues de robot/RC",
+        "semelles",
+        "sangles",
+        "bouchons",
+        "soufflets",
+        "protections GoPro/drone"
+      ],
+      "pros": [
+        "Quasi indestructible, élastique",
+        "Adhérence couches exceptionnelle",
+        "Résiste à l'abrasion, huiles, vibrations",
+        "Le direct drive de la S1 est fait pour ça"
+      ],
+      "cons": [
+        "Lent à imprimer (25-40 mm/s en sécurité)",
+        "Stringing facile, détails fins difficiles",
+        "Très hygroscopique (bulles et fils si humide)",
+        "Les supports se retirent mal"
+      ],
+      "nozzle_c": "210-230",
+      "bed_c": "30-50 (colle même à froid)",
+      "ace_pro": "non - tube arrière",
+      "ace_pro_note": "❌ INTERDIT. Le filament souple se vrille dans les splitters/tubes de l'ACE → bourrage garanti. Mono-bobine par le tube PTFE arrière uniquement, et dureté ≥ 95A obligatoire (les 85A/90A sont trop mous même en direct).",
+      "enclosure": "ouverte ou fermée, peu importe (pas de warping)",
+      "drying": "quasi obligatoire avant chaque session. Idéal 55-60 °C × 6-8 h → tu peux utiliser l'ACE comme sécheuse (55 °C, parfait pour le TPU) puis sortir la bobine et la monter à l'arrière. Astuce gratuite.",
+      "ace_drying_ok": "oui",
+      "difficulty": "⭐⭐⭐ Intermédiaire (facile à réussir moche, dur à réussir propre)",
+      "price_eur_kg": {
+        "entry": "18-25",
+        "premium": "30-45"
+      },
+      "price_detail": {
+        "entry": "18-25 € (Anycubic TPU 95A 23,99 €, Sunlu TPU ~18-22 €, eSun TPU-95A ~20-25 €)",
+        "premium": "30-45 € (Bambu TPU 95A HF 34,99 €, Polymaker PolyFlex ~35-45 €/kg — bobines 750 g)"
+      },
+      "brands": [
+        {"name": "eSun TPU-95A", "note": "la référence abordable, se trouve partout."},
+        {"name": "Anycubic TPU 95A", "note": "23,99 € — profil natif Kobra S1."},
+        {"name": "Polymaker PolyFlex TPU95-HF", "note": "version high-flow, imprime presque 2× plus vite, premium justifié si tu fais beaucoup de flexible."}
+      ],
+      "tips": [
+        "Désactive ou minimise la rétraction (0,5-1 mm max), vitesse constante.",
+        "Pas de colle ; au contraire, le TPU peut trop coller → voile de colle en séparateur si besoin.",
+        "Charge le filament à la main doucement : il ne se pousse pas, il s'accompagne.",
+        "Stocke en sac zip + dessicant TOUJOURS, c'est une éponge."
+      ],
+      "sources": [
+        {"label": "Amazon.fr eSun TPU-95A", "url": "https://www.amazon.fr/eSUN-Filament-Imprimante-Pr%C3%A9cision-Dimensionnelle/dp/B08DXWFYQC"}
+      ]
+    },
+    {
+      "id": "nylon_pa",
+      "name": "Nylon / PA",
+      "tagline": "l'ingénieur exigeant",
+      "use_cases": "Pièces mécaniques de haute résistance, frottement, usure.",
+      "examples": [
+        "engrenages",
+        "charnières vivantes",
+        "paliers",
+        "glissières",
+        "clips structurels soumis à fatigue",
+        "pièces de drone porteur",
+        "visserie plastique",
+        "outillage qui prend des coups"
+      ],
+      "pros": [
+        "Tenace + auto-lubrifiant (frottement)",
+        "Résistance fatigue/usure inégalée",
+        "Tient 100-150 °C selon grade"
+      ],
+      "cons": [
+        "L'éponge ultime : imprimable uniquement sec",
+        "Warping sévère (PA6/66), adhérence plateau difficile",
+        "Cher",
+        "Séchage 70-90 °C → hors de portée de l'ACE"
+      ],
+      "nozzle_c": "250-290 (les 320 °C de la S1 donnent de la marge ✅)",
+      "bed_c": "80-100 (selon grade ; PA12 plus tolérant que PA6)",
+      "ace_pro": "déconseillé",
+      "ace_pro_note": "⚠️ Techniquement possible (rigide) mais déconseillé : le nylon doit sortir d'un séchoir et être imprimé dans la foulée ; l'ACE à 55 °C ne le sèche PAS (il faut 70-90 °C × 8-12 h). En pratique : dryer externe chauffant à 70 °C+ (Sunlu S4, Creality Space Pi…) → impression directe depuis le dryer via tube arrière.",
+      "enclosure": "porte FERMÉE impérativement",
+      "drying": "OBLIGATOIRE, dryer externe — c'est LE matériau qui justifie l'achat d'une sécheuse 70 °C+.",
+      "ace_drying_ok": "non (dryer externe)",
+      "difficulty": "⭐⭐⭐⭐⭐ Expert",
+      "price_eur_kg": {
+        "pa12": "45-60",
+        "copa_pa6": "55-75"
+      },
+      "price_detail": {
+        "pa12": "PA12 « accessibles » : 45-60 € (Fiberlogy PA12 ~49 €/kg, eSun PA12 ~60 €/kg)",
+        "copa_pa6": "CoPA / PA6 qualité : 55-75 € (Polymaker PolyMide CoPA ~60-70 €)",
+        "warning": "⚠️ Beaucoup de bobines nylon font 500-750 g, pas 1 kg — toujours recalculer au kg."
+      },
+      "brands": [
+        {"name": "Polymaker PolyMide CoPA", "note": "technologie Warp-Free, le nylon le plus imprimable du marché."},
+        {"name": "Fiberlogy PA12", "note": "fabriqué en UE (Pologne), PA12 = moins d'humidité et moins de warping que PA6, ~49 €/kg."},
+        {"name": "eSun ePA/PA12", "note": "alternative plus diffusée sur Amazon."}
+      ],
+      "tips": [
+        "Adhérence : bâton de colle PVA ou Magigoo PA obligatoire sur le PEI (le nylon n'accroche pas, ou trop, jamais entre les deux).",
+        "Brim large + enceinte préchauffée 15 min.",
+        "Conserver en sac scellé avec dessicant, voire en boîte étanche avec hygromètre.",
+        "Commence par un PA12 ou un CoPA, jamais un PA6 pur.",
+        "Si ton besoin réel est « pièce solide », demande-toi d'abord si un PETG ou un ASA ne suffit pas — le nylon est rarement nécessaire en domestique."
+      ],
+      "sources": [
+        {"label": "3DJake.be Nylon", "url": "https://www.3djake.be/filament-2/nylon"},
+        {"label": "Fiberlogy", "url": "https://fiberlogy.com/"}
+      ]
+    },
+    {
+      "id": "pc",
+      "name": "PC (Polycarbonate)",
+      "tagline": "la brute thermique",
+      "use_cases": "Le plus résistant chaleur + chocs des filaments « courants ».",
+      "examples": [
+        "pièces sous capot moteur",
+        "supports d'éclairage halogène/LED puissante",
+        "pièces d'imprimante 3D elle-même (l'enceinte chauffe !)",
+        "outillage de serrage",
+        "pièces transparentes techniques",
+        "protections mécaniques"
+      ],
+      "pros": [
+        "Tient 110-130 °C (blends)",
+        "Rigidité + résistance choc énormes",
+        "Versions transparentes"
+      ],
+      "cons": [
+        "Buse 270-290 °C, plateau 100-120 °C : la S1 est à la limite haute de sa plage",
+        "Warping et délamination sans enceinte bien chaude",
+        "Hygroscopique (séchage 80 °C+)",
+        "Cher"
+      ],
+      "nozzle_c": "270-290 ✅ (dans la plage 320 °C)",
+      "bed_c": "100-120 ✅ (pile le max de la S1)",
+      "ace_pro": "déconseillé",
+      "ace_pro_note": "⚠️ possible mécaniquement (rigide), mais même problème que le nylon : séchage 80 °C inaccessible à l'ACE → tube arrière depuis un dryer externe recommandé",
+      "enclosure": "FERMÉE, préchauffée au max — l'enceinte passive de la S1 plafonne vers 40-45 °C, c'est correct pour des petites/moyennes pièces en PC-blend, insuffisant pour du gros volume en PC pur (chambre active 60 °C+ idéale, que la S1 n'a pas). Vise les PC « blend » grand public, pas le PC industriel.",
+      "drying": "dryer externe 80 °C × 8 h, obligatoire",
+      "ace_drying_ok": "non (dryer externe)",
+      "difficulty": "⭐⭐⭐⭐⭐ Expert",
+      "price_eur_kg": {
+        "entry": "30-43",
+        "special": "45-60"
+      },
+      "price_detail": {
+        "entry": "30-43 € (Anycubic PC 31,99 €, Polymaker PolyLite PC ~35-40 €, Bambu PC 42,99 €)",
+        "special": "Spéciaux : 45-60 € (Bambu PC FR ignifugé 56,99 €, Prusament PC Blend ~44 € / 970 g)"
+      },
+      "brands": [
+        {"name": "Prusament PC Blend", "note": "formulé pour imprimantes grand public, le plus tolérant."},
+        {"name": "Polymaker PolyLite PC / PolyMax PC", "note": "référence qualité."},
+        {"name": "Anycubic PC", "note": "31,99 € — le moins cher, profil S1 natif."}
+      ],
+      "tips": [
+        "Colle PVA/Magigoo PC sur le PEI obligatoire (le PC arrache le PEI sinon — pire que le PETG).",
+        "Pièces petites et trapues = OK ; grandes pièces plates = délamination probable sur enceinte passive.",
+        "Honnêteté : sur une S1, le PC est faisable mais limite. Si tes besoins sont fréquents en haute température, l'ASA (95 °C) couvre déjà 90 % des cas réels."
+      ]
+    },
+    {
+      "id": "pla_cf_petg_cf",
+      "name": "PLA-CF / PETG-CF",
+      "tagline": "la fibre carbone",
+      "use_cases": "Versions chargées en fibre de carbone courte (~10-20 %) : rigidité accrue, fini mat superbe, zéro warping (PLA-CF) — souvent achetées autant pour l'esthétique que la mécanique.",
+      "examples": [
+        "pièces de drone (frames, supports caméra)",
+        "outillage rigide",
+        "supports GPS/caméra vélo-moto",
+        "pièces cosmétiques techno (le fini carbone mat est magnifique)",
+        "gabarits dimensionnellement stables"
+      ],
+      "pros": [
+        "Rigidité ↑, déformation thermique ↑",
+        "Fini mat haut de gamme qui cache tout",
+        "Warping quasi nul"
+      ],
+      "cons": [
+        "Abrasif → buse laiton morte en 1-2 bobines",
+        "Plus cassant que le matériau de base (fibres COURTES : rigide ≠ plus solide en traction)",
+        "Plus cher",
+        "INTERDIT dans l'ACE"
+      ],
+      "nozzle_c": "PLA-CF 210-250 · PETG-CF 240-280",
+      "bed_c": "55-70 (PLA-CF) / 80-100 (PETG-CF)",
+      "ace_pro": "non - tube arrière",
+      "ace_pro_note": "❌ INTERDIT (fibres = usure des passages internes + cassures dans les tubes). Tube arrière uniquement.",
+      "nozzle_requirement": "⚠️ Buse acier trempé requise (≥ 0,4 mm, idéal 0,6). La S1 est annoncée compatible filaments chargés, mais vérifie quelle buse est montée sur ton hotend avant la première bobine CF — au moindre doute, monte la buse acier (hotend swap rapide sur la S1).",
+      "enclosure": "PLA-CF ouvert, PETG-CF entrouvert",
+      "drying": "recommandé (les CF se gorgent d'eau via la matrice) — 55 °C ACE OK pour PLA-CF, limite pour PETG-CF",
+      "ace_drying_ok": "oui (PLA-CF) / limite (PETG-CF)",
+      "difficulty": "⭐⭐⭐ Intermédiaire (facile à imprimer, exigeant en matériel)",
+      "price_eur_kg": {
+        "pla_cf": "25-35",
+        "petg_cf": "25-40"
+      },
+      "price_detail": {
+        "pla_cf": "PLA-CF : 25-35 € (Anycubic 26,99 €, Bambu dès 26,99 €)",
+        "petg_cf": "PETG-CF : 25-40 € (Anycubic 25,99 €, Bambu dès 32,99 €)",
+        "pa_cf_info": "(Pour info, les PA-CF : 45-85 € — Bambu PA6-CF 44,99 €, eSun PA-CF ~46-55 €, PAHT-CF 54 €+ : le vrai matériau structurel, mais cumul des contraintes nylon + CF.)"
+      },
+      "brands": [
+        {"name": "Anycubic PLA-CF / PETG-CF", "note": "les moins chers, profils S1 natifs."},
+        {"name": "Bambu PLA-CF / PETG-CF", "note": "constance exemplaire."},
+        {"name": "eSun ePLA-CF / ePETG-CF", "note": "bon plan Amazon fréquent."}
+      ],
+      "tips": [
+        "Buse 0,6 mm = confort et zéro bouchage, et le fini mat masque les couches plus épaisses.",
+        "Ne jamais laisser une bobine CF dans l'ACE « juste pour sécher » puis oublier de la sortir.",
+        "Le CF court n'est PAS magique : pour de la vraie solidité, un PETG épais bat souvent un PLA-CF fin."
+      ]
+    },
+    {
+      "id": "hips",
+      "name": "HIPS",
+      "tagline": "le discret polyvalent",
+      "use_cases": "Deux vies : (1) matériau léger type ABS allégé, ponçable, peignable — maquettes, props, bustes ; (2) support soluble pour l'ABS/ASA (se dissout au D-limonène) — et grâce à l'ACE Pro, ce combo multi-matériaux est réellement accessible sur la S1.",
+      "examples": [
+        "props cosplay légers (casques !)",
+        "maquettes d'architecture",
+        "bustes à peindre",
+        "supports solubles sous pièces ABS complexes (impression ACE 2 matériaux : ABS corps + HIPS supports)"
+      ],
+      "pros": [
+        "~30 % plus léger que l'ABS",
+        "Se ponce et se peint admirablement",
+        "Soluble au D-limonène = supports parfaits pour ABS/ASA",
+        "Pas cher"
+      ],
+      "cons": [
+        "Mêmes contraintes d'impression que l'ABS (enceinte, fumées styrène)",
+        "Le D-limonène coûte cher et dissout LENTEMENT (24-48 h)",
+        "Peu de couleurs"
+      ],
+      "nozzle_c": "230-250",
+      "bed_c": "90-100",
+      "ace_pro": "oui",
+      "ace_pro_note": "✅ OUI — et c'est son cas d'usage star : slot 1 ABS + slot 2 HIPS supports",
+      "enclosure": "porte FERMÉE (comme l'ABS)",
+      "drying": "peu hygroscopique, 55 °C ACE suffit largement",
+      "ace_drying_ok": "oui",
+      "difficulty": "⭐⭐⭐ Intermédiaire (= ABS)",
+      "price_eur_kg": {
+        "entry": "13-20",
+        "mid": "20-27"
+      },
+      "price_detail": {
+        "entry": "13-20 € (eSun HIPS 13,43-19,19 €/kg chez 3DJake.be, Spectrum HIPS-X ~19,59-24,49 €)",
+        "mid": "20-27 € (Fiberlogy HIPS ~22,64 €/kg)"
+      },
+      "brands": [
+        {"name": "eSun HIPS", "note": "le standard, dissolution propre, le moins cher."},
+        {"name": "Fiberlogy HIPS", "note": "qualité UE, fini mat."}
+      ],
+      "tips": [],
+      "sources": [
+        {"label": "3DJake.be HIPS", "url": "https://www.3djake.be/filament-2/hips"}
+      ]
+    },
+    {
+      "id": "pva",
+      "name": "PVA / supports solubles",
+      "tagline": "pertinent sur la S1 ?",
+      "verdict": "Le verdict honnête : rarement pertinent, mais possible. Le PVA se dissout dans l'eau tiède → supports « parfaits » sous les géométries impossibles (sphères creuses, mécanismes imprimés assemblés, surplombs internes).",
+      "use_cases": "Supports impossibles (rare). Le PVA se dissout dans l'eau tiède → supports « parfaits » sous les géométries impossibles (sphères creuses, mécanismes imprimés assemblés, surplombs internes).",
+      "examples": [
+        "sphères creuses",
+        "mécanismes imprimés assemblés",
+        "surplombs internes"
+      ],
+      "reality_mono_nozzle_ace": [
+        "✅ Techniquement faisable : l'ACE change de filament, le slicer sait imprimer « supports en filament 2 ».",
+        "❌ Purge énorme : chaque alternance PLA↔PVA gaspille du filament dans la poop chute. Sur un print avec changement à chaque couche, tu peux jeter plus de PVA en purge que dans les supports. À 60-90 €/kg, ça pique.",
+        "❌ Temps : chaque changement = 30-60 s. Des centaines de changements = des heures ajoutées.",
+        "❌ Hygroscopie extrême : le PVA humide devient inimprimable (il cuit dans la buse). Séchage 45-55 °C → là, l'ACE à 55 °C est pile dans la plage ✅, un des rares matériaux exotiques où l'ACE suffit. Mais stockage hermétique impératif entre deux usages."
+      ],
+      "strategy": [
+        "Par défaut : supports normaux en PLA/PETG + bons réglages d'interface (distance 0,2 mm, interface 2 couches) = 95 % des besoins.",
+        "Astuce gratuite éprouvée : corps en PLA + interface de support en PETG (ou l'inverse) — les deux n'adhèrent pas entre eux → supports qui se détachent tout seuls, coût nul, déjà permis par l'ACE.",
+        "PVA réservé aux géométries réellement impossibles, en réglant « PVA sur les couches d'interface uniquement » (pas tout le support) pour limiter purge et coût.",
+        "Alternative au PVA : BVOH (~70-100 €/kg) — se dissout plus vite, un peu moins capricieux à l'humidité."
+      ],
+      "ace_pro": "oui (interface only)",
+      "enclosure": "Ouverte",
+      "drying": "Séchage 45-55 °C → l'ACE à 55 °C est pile dans la plage. Stockage hermétique impératif entre deux usages.",
+      "ace_drying_ok": "oui",
+      "difficulty": "⭐⭐⭐⭐ Avancé (la difficulté est dans la gestion de l'humidité et du slicing, pas l'impression)",
+      "price_eur_kg": {
+        "pva": "50-90"
+      },
+      "price_detail": {
+        "pva": "PVA : 50-90 € (eSun, Sunlu en bas ; Ultimaker/BVOH premium au-dessus). Plusieurs revendeurs UE ont réduit leur offre PVA (3DJake.be n'avait plus de R3D PVA en stock en juin 2026) — signe que le marché bascule vers le BVOH et les astuces d'interface.",
+        "note": "fourchette indicative, offre instable"
+      },
+      "brands": [],
+      "tips": []
+    }
+  ],
+  "summary_table": [
+    {"material": "PLA", "price_eur_kg": "12-30 (sweet spot 15-20)", "difficulty": "⭐", "ace_pro": "✅", "door": "Ouverte", "ace_drying_55": "✅ suffit", "main_use": "Tout l'intérieur, déco, proto"},
+    {"material": "PLA variantes (mat/silk/HS/bois/glow)", "price_eur_kg": "17-28", "difficulty": "⭐-⭐⭐", "ace_pro": "✅ (sauf bois)", "door": "Ouverte", "ace_drying_55": "✅ suffit", "main_use": "Déco premium"},
+    {"material": "PETG", "price_eur_kg": "13-25", "difficulty": "⭐⭐", "ace_pro": "✅", "door": "Ouverte", "ace_drying_55": "🟡 limite, OK en allongeant", "main_use": "Extérieur facile, pots de fleurs, fonctionnel"},
+    {"material": "ABS", "price_eur_kg": "14-25", "difficulty": "⭐⭐⭐", "ace_pro": "✅", "door": "Fermée", "ace_drying_55": "🟡 dépanne (peu hygro)", "main_use": "Mécanique + lissage acétone"},
+    {"material": "ASA", "price_eur_kg": "20-35", "difficulty": "⭐⭐⭐", "ace_pro": "✅", "door": "Fermée", "ace_drying_55": "🟡 dépanne (peu hygro)", "main_use": "Pièces auto, extérieur définitif"},
+    {"material": "TPU 95A", "price_eur_kg": "18-45", "difficulty": "⭐⭐⭐", "ace_pro": "❌ tube arrière", "door": "Indifférent", "ace_drying_55": "✅ pile la bonne température (sécher dans l'ACE, imprimer par l'arrière)", "main_use": "Joints, coques, amortisseurs"},
+    {"material": "Nylon/PA", "price_eur_kg": "45-75", "difficulty": "⭐⭐⭐⭐⭐", "ace_pro": "⚠️ déconseillé", "door": "Fermée", "ace_drying_55": "❌ dryer externe 70-90 °C obligatoire", "main_use": "Engrenages, usure"},
+    {"material": "PC", "price_eur_kg": "30-57", "difficulty": "⭐⭐⭐⭐⭐", "ace_pro": "⚠️ déconseillé", "door": "Fermée", "ace_drying_55": "❌ dryer externe 80 °C obligatoire", "main_use": "Haute température + chocs"},
+    {"material": "PLA-CF / PETG-CF", "price_eur_kg": "25-40", "difficulty": "⭐⭐⭐", "ace_pro": "❌ tube arrière + buse acier", "door": "Ouverte/entrouverte", "ace_drying_55": "✅/🟡", "main_use": "Rigidité + fini mat carbone"},
+    {"material": "HIPS", "price_eur_kg": "13-27", "difficulty": "⭐⭐⭐", "ace_pro": "✅", "door": "Fermée", "ace_drying_55": "✅ suffit", "main_use": "Props légers + supports solubles d'ABS"},
+    {"material": "PVA", "price_eur_kg": "50-90", "difficulty": "⭐⭐⭐⭐", "ace_pro": "✅ (interface only !)", "door": "Ouverte", "ace_drying_55": "✅ 45-55 °C pile", "main_use": "Supports impossibles (rare)"}
+  ],
+  "starter_kit_belgium": {
+    "intro": "Par quoi commencer — kit de démarrage belge",
+    "phase1": {
+      "label": "Phase 1 — les 4 slots de l'ACE",
+      "budget_eur": "65-80",
+      "spools": [
+        {"spool": "PLA noir (Bambu Basic ou Anycubic)", "why": "LA couleur à tout faire, cache les défauts", "price": "~12-16 €"},
+        {"spool": "PLA blanc ou gris", "why": "Calibration, pièces à peindre, contraste multi-couleurs", "price": "~12-16 €"},
+        {"spool": "PLA mat couleur fun (orange, bleu...)", "why": "Le mat rend tout de suite « pro »", "price": "~18-20 €"},
+        {"spool": "PETG noir ou gris", "why": "Première marche vers le fonctionnel/extérieur", "price": "~14-16 €"}
+      ],
+      "tips": [
+        "💡 Bon plan n°1 : le bulk Bambu EU (4+ bobines panachées PLA/PETG/ABS à 11,50 € pièce) remplit l'ACE pour ~46 € + port — difficile à battre, et bobines plastique parfaites pour l'ACE.",
+        "💡 Bon plan n°2 : 3DJake.be = livraison gratuite dès 54,90 € en Belgique, livré en 2-3 jours."
+      ]
+    },
+    "phase2": {
+      "label": "Phase 2 — après 1-2 mois",
+      "budget_eur": "45-50",
+      "spools": [
+        {"spool": "1× ASA noir", "why": "tu as une enceinte fermée, exploite-la — pièces extérieures/auto.", "price": "~24 €"},
+        {"spool": "1× TPU 95A", "why": "monté par l'arrière, séché dans l'ACE. Coques et joints.", "price": "~20-24 €"}
+      ]
+    },
+    "phase3": {
+      "label": "Phase 3 — quand un vrai besoin émerge",
+      "items": [
+        {"item": "PLA-CF ou PETG-CF", "why": "+ vérification/achat buse acier — pour le fini et la rigidité.", "price": "~26-33 €"},
+        {"item": "Dryer externe 70 °C+ (Sunlu S4 ou équivalent)", "why": "avant tout achat de nylon ou PC, pas l'inverse.", "price": "~40-70 €"}
+      ]
+    },
+    "total_realistic_eur": "110-130",
+    "total_note": "Budget total démarrage réaliste : ~110-130 € pour les phases 1+2 (6 bobines couvrant 90 % des usages d'une S1)."
+  },
+  "buying_pitfalls": [
+    "Bobines carton dans l'ACE — Sunlu, eSun, Polymaker PolyTerra et beaucoup de petits prix Amazon livrent sur carton : peluches/poussière dans l'ACE, glissement des rouleaux d'entraînement, détection capricieuse. Solutions : (a) vérifier « plastic spool » avant achat, (b) acheter des recharges (refill) + bobines réutilisables plastique, (c) réserver les cartons au tube arrière. Anycubic et Bambu = plastique d'office.",
+    "Recharges (refills) sans bobine — Bambu et Anycubic vendent des refills 2-5 € moins chers : excellent à condition d'avoir déjà la bobine réutilisable compatible. Une refill sans bobine = filament inutilisable le jour J.",
+    "Diamètre : 1,75 mm UNIQUEMENT — du 2,85 mm (standard Ultimaker) traîne encore sur Amazon, souvent en promo alléchante. Incompatible. Vérifier chaque fiche produit.",
+    "Le PLA « mystère » à 9-11 € — vendeurs tiers Amazon sans marque : diamètre irrégulier (±0,05 et pire), bobinage croisé qui bloque en plein print (mortel avec l'ACE qui tire), colorants abrasifs douteux. En dessous de ~12 €/kg hors promo d'une vraie marque, passe ton chemin. Les vraies promos des vraies marques (Bambu bulk 11,50 €, flash eSun/Sunlu) sont la bonne façon d'avoir ces prix.",
+    "Bobines de 500/750 g vendues au prix psychologique d'1 kg — classique sur les silk, TPU, nylon et tout Polymaker/Fiberlogy/Prusament (850-970 g !). Toujours recalculer le €/kg.",
+    "« High Speed » marketing — sur une CoreXY rapide comme la S1, le PLA HS a un vrai intérêt ; mais un PETG « high speed » imprimé à 400 mm/s donnera quand même un résultat moyen. La vitesse réelle est limitée par le matériau, pas que par l'étiquette.",
+    "Stock UE vs envoi Chine — sur les stores officiels eSun/Sunlu/Anycubic, vérifier « ships from EU » : sinon 2-4 semaines + risque de frais de douane qui annulent l'économie."
+  ],
+  "sources": [
+    {"label": "Bambu Lab EU Store — Filaments (prix PLA/PETG/ABS/ASA/TPU/PC/CF/PA)", "url": "https://eu.store.bambulab.com/collections/bambu-lab-3d-printer-filament"},
+    {"label": "Anycubic EU — Filaments (prix + temps/températures officiels par matériau)", "url": "https://eu.anycubic.com/collections/filaments"},
+    {"label": "3DJake Belgique — Nylon (prix €/kg affichés, livraison BE)", "url": "https://www.3djake.be/filament-2/nylon"},
+    {"label": "3DJake Belgique — HIPS (prix €/kg affichés, livraison BE)", "url": "https://www.3djake.be/filament-2/hips"},
+    {"label": "Amazon.fr — eSun PLA+", "url": "https://www.amazon.fr/eSUN-Pr%C3%A9cision-Dimensionnelle-Cartouche-Imprimante/dp/B07FQ98RNP"},
+    {"label": "Amazon.fr — eSun TPU-95A", "url": "https://www.amazon.fr/eSUN-Filament-Imprimante-Pr%C3%A9cision-Dimensionnelle/dp/B08DXWFYQC"},
+    {"label": "Sunlu Store EU (PLA+/TPU prix MOQ)", "url": "https://fr.store.sunlu.com/"},
+    {"label": "Prusament — PLA", "url": "https://prusament.com/materials/pla/"},
+    {"label": "Prusament — PC Blend", "url": "https://prusament.com/materials/prusament-pc-blend/"},
+    {"label": "Fiberlogy (fabricant UE) — PA12, HIPS", "url": "https://fiberlogy.com/"},
+    {"label": "Filament Price Tracker (tendances marché)", "url": "https://filamentpricetracker.com/"}
+  ],
+  "uncertainties": "Incertitudes assumées : les prix Bambu affichés sont les prix « bulk sale » (4+ bobines) — à l'unité compter +40-60 %. Les prix Anycubic « regular » barrés sont gonflés, le prix de vente courant est celui indiqué. L'offre PVA en Belgique est instable (références abandonnées) — fourchette donnée à titre indicatif. La nature exacte de la buse stock de la S1 (laiton vs acier selon les lots) mérite vérification physique avant la première bobine CF/glow/bois."
+}

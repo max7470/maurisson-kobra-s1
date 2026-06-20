@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "printer",
+    "source_md": ["01-machine-et-wiki.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr"
+  },
+  "summary": "La Kobra S1 Combo est une imprimante FDM CoreXY fermée (caisson) accompagnée du module multi-filament ACE Pro (4 bobines, séchage actif y compris pendant l'impression). Sortie début 2025, positionnée comme l'alternative budget à la Bambu Lab P1S Combo.",
+  "specs": {
+    "volume_impression": "250 × 250 × 250 mm",
+    "structure": "CoreXY caisson fermé (porte + capot en PC, pas en verre — choix sécurité assumé par Anycubic)",
+    "axe_z": "3 vis trapézoïdales reliées au moteur Z par courroie",
+    "vitesse": "300 mm/s recommandé, 600 mm/s max, accélération 20 000 mm/s² (Benchy en 13 min à 0,2 mm)",
+    "buse": "0,4 mm de série, quick-release (hotend démontable à la main via un levier). 0,2 mm supporté depuis firmware V2.5.8.6",
+    "hauteur_de_couche": "0,05 – 0,28 mm (buse 0,4)",
+    "temp_buse_max": "320 °C (gorge en tube composite céramique résistant 350 °C — ce n'est PAS du PTFE)",
+    "temp_plateau_max": "120 °C",
+    "plateau": "PEI acier ressort (spring steel), 250×250 mm",
+    "materiaux": "PLA, PETG, ABS, ASA, PET, PA, PC, HIPS, TPU 95A (en mode mono uniquement), fibre carbone/verre (en mono, PAS via ACE Pro)",
+    "nivellement": "Automatique (jauge de contrainte / strain gauge) + préchauffe plateau +5 °C avant leveling (depuis FW V2.4.8.3)",
+    "reprise_apres_coupure": "Oui + détection fin de filament",
+    "camera": "Intégrée, 720p, AI détection (spaghetti + objets étrangers), timelapse, pas de vision nocturne (bandeau LED latéral)",
+    "ecran": "Tactile, orientable, sur le dessus du caisson",
+    "alimentation": "100–240 V (tension large), puissance nominale 1500 W",
+    "conso_reelle_mesuree": "~800 W en pic à la chauffe, ~300 W en impression avec ACE Pro, ~250 W sans (review Notebookcheck)",
+    "bruit": "~44 dB annoncé",
+    "connexion": "Wi-Fi 2,4 GHz uniquement (pas de 5 GHz, pas de bande mixte), USB, adaptateur USB→Ethernet supporté (FW ≥ V2.5.8.6)",
+    "dimensions_poids_machine": "400 × 410 × 490 mm, 18 kg",
+    "slicer": "Anycubic Slicer Next (fork d'OrcaSlicer) ; OrcaSlicer peut envoyer des fichiers depuis FW V2.5.9.9 ; .gcode et .3mf supportés",
+    "open_source": "Non (Anycubic dit que c'est « dans le plan », rien de concret — à prendre avec des pincettes)",
+    "filtration": "Ventilateur filtre arrière + sachet de charbon actif dans une trappe interne (voir maintenance)"
+  },
+  "fans": [
+    {
+      "name": "Refroidissement pièce (tête)",
+      "role": "Refroidissement de la pièce en cours d'impression",
+      "note": "Situé sur la tête d'impression"
+    },
+    {
+      "name": "Refroidissement hotend",
+      "role": "Refroidissement du bloc chauffant / hotend",
+      "note": ""
+    },
+    {
+      "name": "Ventilateur auxiliaire (caisson)",
+      "role": "Crée une « couche d'air » sur la pièce",
+      "note": "Situé dans le caisson"
+    },
+    {
+      "name": "Ventilateur filtre arrière",
+      "role": "Filtration de l'air (avec sachet de charbon actif)",
+      "note": ""
+    },
+    {
+      "name": "Ventilateur carte mère",
+      "role": "Refroidissement de l'électronique / carte mère",
+      "note": "⚠️ Celui-ci tourne même au repos, c'est voulu — sécurité"
+    }
+  ],
+  "connectivity": {
+    "wifi": "2,4 GHz uniquement (pas de 5 GHz, pas de bande mixte)",
+    "usb": "Oui (port USB)",
+    "ethernet": "Adaptateur USB→Ethernet supporté (FW ≥ V2.5.8.6)",
+    "slicer": "Anycubic Slicer Next (fork d'OrcaSlicer) ; OrcaSlicer peut envoyer des fichiers depuis FW V2.5.9.9 ; .gcode et .3mf supportés",
+    "open_source": "Non (Anycubic dit que c'est « dans le plan », rien de concret — à prendre avec des pincettes)"
+  },
+  "ace_pro": {
+    "summary": "L'ACE Pro (Anycubic Color Engine) est le boîtier 4 bobines posé au-dessus/à côté de la machine. Une icône de connexion apparaît sur l'écran quand le branchement est bon.",
+    "cabling": "Câble signal 6 pins côté ACE Pro, 4 pins côté imprimante + alim séparée.",
+    "operation": [
+      "4 slots, chargement automatique : on pousse le filament dans la goulotte, on lâche dès qu'on sent une traction, l'ACE avale tout seul. ⚠️ Une bobine à la fois — attendre la fin du chargement avant d'insérer la suivante (l'ACE ne reconnaît que le premier filament inséré).",
+      "Couper la pointe du filament et la redresser avant insertion (si plié/noué → couper la partie tordue).",
+      "RFID : les bobines officielles Anycubic avec puce sont reconnues automatiquement (type + couleur + matière restante). Filament tiers : régler type + couleur à la main sur l'écran (icône 1 = couleur, icône 2 = type), sinon pas d'impression. Le slicer synchronise les consommables depuis la machine.",
+      "Déchargement : sélectionner le slot → « Reject » → attendre la fin → tirer la bobine.",
+      "Buffer mechanism (le mécanisme tampon à l'arrière, où arrivent les 4 tubes PTFE) : absorbe les variations de tension. Bruits légers pendant l'impression = normal jusqu'à un certain point, le wiki a une page dédiée.",
+      "Détection d'enchevêtrement/blocage intégrée : si une bobine coince, la machine met en pause et reprend après intervention manuelle."
+    ],
+    "drying": {
+      "max_temp_c": 55,
+      "during_print": true,
+      "tpu_example": "50–55 °C pendant 4–6 h (recommandation officielle TPU avant impression)",
+      "notes": [
+        "Séchage actif jusqu'à 55 °C max, y compris pendant l'impression (gros différenciateur vs Bambu AMS).",
+        "⚠️ La température mesurée à la goulotte d'entrée paraît plus basse que la consigne : c'est normal, la valeur affichée est une moyenne multi-points (entrée d'air, sortie, NFC, goulotte) — l'entrée d'air est la référence.",
+        "⚠️ L'ACE Pro première génération n'a PAS de capteur d'humidité ni de stockage étanche (ça, c'est l'ACE 2 Pro, qui sèche à 65 °C et est supporté depuis FW V2.7.0.7). L'ACE Pro sèche, mais ne stocke pas au sec : bobines hygroscopiques (PA, TPU) → boîte de séchage à part."
+      ]
+    },
+    "limits_forbidden": [
+      "NE PAS passer dans l'ACE Pro : filaments trop durs, cassants ou chargés fibre (PLA-CF/GF, carbone, verre, PLA Silk non-officiel) → usure des canaux internes, casse, bouchons.",
+      "TPU 95A et HIPS : séchage OK dans l'ACE, mais impression via l'ACE interdite → utiliser le porte-bobine mono-couleur à l'arrière (le wiki a un guide TPU complet : débrancher le câble signal ACE, retirer le module de détection de retour, imprimer en direct).",
+      "TPU < 95A (85A et moins) : pas imprimable du tout sur la S1 (écrasé par la roue d'extrusion).",
+      "Bobines : privilégier le plastique, 195–200 mm de diamètre, 60–68 mm de large, flasques 3–6 mm. Bobines carton = risque de glisse + débris → imprimer la bague d'adaptation officielle (fichiers 3mf dans le wiki : « ACE Pro Anti-Tangle Model 1 & 2 »)."
+    ],
+    "filament_backup": {
+      "description": "Relais automatique de bobines : si 2 slots contiennent même matière + même couleur, et que l'option « auto refill » est cochée dans la gestion des consommables, la machine bascule automatiquement sur la bobine de secours quand la première est vide — idéal pour les grosses pièces.",
+      "conditions": [
+        "même type ET même couleur (différent type + même couleur = refusé)",
+        "option « auto refill » cochée dans la gestion des consommables",
+        "filament tiers → configurer les 2 slots identiquement à la main"
+      ]
+    },
+    "eight_color": "On peut chaîner 2 ACE Pro pour 8 couleurs (supporté depuis FW V2.4.8.3) — guide : Eight-color Module Installation (https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/color-module).",
+    "multicolor_bleeding": "Si mélange de couleurs sur petites pièces avec changements fréquents : augmenter le coefficient de purge (flushing) depuis l'interface d'impression. Page wiki dédiée : Reduce waste (https://wiki.anycubic.com/en/home/knowledge-sharing/reduce-waste)."
+  },
+  "sources": [
+    {"label": "FAQ wiki", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/faq"},
+    {"label": "Introduction aux composants", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/introduction"},
+    {"label": "Page produit Kobra S1 Combo", "url": "https://store.anycubic.com/products/kobra-s1-combo"},
+    {"label": "Review Notebookcheck", "url": "https://www.notebookcheck.net/A-splash-of-color-on-your-desk-Reviewing-the-Anycubic-Kobra-S1-Combo-Ace-Pro.1010199.0.html"},
+    {"label": "ACE Pro Tips (limites filaments/bobines)", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-3-combo/ace-pro-notes"},
+    {"label": "Chargement & config ACE Pro", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/ace-pro-loading-steps-and-configuration-information"},
+    {"label": "Filament Backup (relais bobines)", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/automatic-feeding-guide"},
+    {"label": "Guide TPU", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/tpu-printing-guide"},
+    {"label": "Specs ACE Pro", "url": "https://store.anycubic.com/products/anycubic-ace-pro"},
+    {"label": "Module 8 couleurs (2× ACE)", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/color-module"},
+    {"label": "Reduce waste (purge multi-couleur)", "url": "https://wiki.anycubic.com/en/home/knowledge-sharing/reduce-waste"}
+  ]
+}

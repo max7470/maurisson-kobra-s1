@@ -1,0 +1,480 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "mods",
+    "source_md": ["03-mods-firmware-upgrades.md", "tuning-kobra-s1.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr",
+    "research_note": "Sources croisées : GitHub Rinkhals (jbatonnet + rinkhals-community), doc officielle Rinkhals, MakerWorld, Printables, wiki Anycubic, forums (drucktipps3d, Reddit, OrcaSlicer discussions)."
+  },
+  "rinkhals": {
+    "what": "Rinkhals (créé par Jbatonnet) n'est PAS un remplacement du firmware Anycubic : c'est un overlay non destructif qui s'installe par-dessus le firmware stock (Kobra OS, basé sur une version fermée de Klipper appelée « gklib/GoKlipper »). Tu gardes TOUT le stock (écran tactile, calibrations, outils Anycubic, ACE Pro) et tu ajoutes des fonctionnalités.",
+    "repo_url": "https://github.com/jbatonnet/Rinkhals",
+    "adds": [
+      "Mainsail + Fluidd (interfaces web Klipper classiques) via Moonraker → contrôle complet depuis le navigateur, sur ton LAN, sans cloud Anycubic",
+      "Caméra intégrée de la S1 visible dans Mainsail/Fluidd (flux webcam) + support caméra USB",
+      "Accès SSH à la machine (c'est un Linux embarqué)",
+      "Système d'apps : OctoEverywhere (accès distant + détection d'échec IA + notifs), OctoApp (app mobile), Tailscale, Cloudflare Tunnel, Spoolman (gestion bobines), SimplyPrint…",
+      "Mises à jour OTA de Rinkhals depuis l'interface",
+      "Envoi de prints depuis OrcaSlicer en réseau local (voir orca_network)"
+    ],
+    "governance_2026": "⚠️ Gouvernance (important, juin 2026) : le projet a changé de mains. Depuis avril 2026, le repo actif est rinkhals-community/Rinkhals (mainteneur : Martin Bogomolni), avec un cycle de release MENSUEL. Le repo jbatonnet/Rinkhals reste la référence historique/doc, mais télécharge les builds récents chez rinkhals-community. La première installation depuis le nouveau repo doit se faire manuellement en .swu ; ensuite les updates OTA repointent dessus.",
+    "governance_links": {
+      "repo_communautaire": "https://github.com/rinkhals-community/Rinkhals/",
+      "repo_historique": "https://github.com/jbatonnet/Rinkhals"
+    },
+    "firmware_compatibility": [
+      {"anycubic_fw": "2.6.0.0 / 2.7.0.7 / 2.7.0.9", "rinkhals": "✅ supporté (releases 2025–début 2026)"},
+      {"anycubic_fw": "2.7.2.1", "rinkhals": "✅ supporté (release 20260601_01, juin 2026)"},
+      {"anycubic_fw": "2.7.2.7", "rinkhals": "✅ hotfix dédié (release 20260606_02, 7 juin 2026)"},
+      {"anycubic_fw": "Toute version plus récente", "rinkhals": "❓ vérifier les release notes AVANT d'updater"}
+    ],
+    "firmware_compat_note": "Rinkhals ne marche QUE sur des versions précises du firmware Anycubic, car il s'injecte dans l'UI stock.",
+    "golden_rule": "Règle d'or : ne JAMAIS accepter une mise à jour officielle Anycubic sans vérifier qu'une release Rinkhals la supporte. Une MAJ Anycubic casse quasi systématiquement Rinkhals jusqu'à ce que l'équipe sorte un correctif (issue #222). Procédure propre : MAJ officielle d'abord → réinstaller la version Rinkhals compatible ensuite.",
+    "golden_rule_issue": "https://github.com/jbatonnet/Rinkhals/issues/222",
+    "ace_pro_compat": {
+      "works": true,
+      "details": [
+        "Oui, l'ACE Pro fonctionne avec Rinkhals, y compris le multi-couleur.",
+        "En multicolor depuis Orca, le slicer génère un fichier .acm à côté du gcode ; gklib le détecte et initialise l'ACE Pro.",
+        "Les releases 2026 ont ajouté : sync du statut MMU, fix de la sélection de slot auto-feed pour les prints mono-couleur, contrôle du flush ACE (réduction du gaspillage de purge), intégration Happy Hare, fix des IDs en dual ACE Pro.",
+        "Piège connu (hérité Kobra 3, à connaître) : imprimer SANS ACE branché via Moonraker peut donner l'erreur 11503 « filament hub not exist » (issue #433). Sur le Combo tu laisses l'ACE branché, donc peu concerné."
+      ],
+      "issue_433": "https://github.com/jbatonnet/Rinkhals/issues/433"
+    },
+    "install": {
+      "doc_complete": "https://jbatonnet.github.io/Rinkhals/",
+      "steps": [
+        "1. Vérifier la version firmware de la S1 (Réglages → À propos) et qu'elle est dans la liste supportée.",
+        "2. Clé USB FAT32, table de partition MBR (GPT = échec silencieux).",
+        "3. Créer un dossier nommé exactement `aGVscF9zb3Nf` à la racine.",
+        "4. Y placer le fichier de la release renommé `update.swu`.",
+        "5. Brancher la clé, printer allumé → bip de détection → barre de progression (~20 s) → barre verte + 2 bips = OK ; barre rouge + 3 bips = échec (mauvaise version firmware, en général).",
+        "6. Une icône Rinkhals apparaît dans les réglages de l'écran tactile."
+      ]
+    },
+    "uninstall": {
+      "note": "C'est un overlay, donc réversible facilement — gros avantage vs un vrai flash.",
+      "disable": "Désactiver : via l'UI tactile Rinkhals, ou créer un fichier `.disable-rinkhals` (via SSH/USB) → reboot → la machine redémarre 100 % stock.",
+      "remove": "Supprimer complètement : effacer ensuite le dossier `/useremain/rinkhals`.",
+      "recovery": "En cas de boot foireux : page Boot Issues Recovery de la doc + les firmwares stock re-flashables sont mirrorés dans le repo.",
+      "recovery_url": "https://jbatonnet.github.io/Rinkhals/printers/recover-boot-issues/"
+    },
+    "risks_warranty": {
+      "brick": "Risque réel mais FAIBLE vu l'architecture overlay + procédure de recovery documentée. Le dev annonce la couleur : « I'm not responsible if you brick your printer ». Les vrais bricks rapportés viennent surtout de bidouilles SSH dans la config Klipper, pas de l'install standard.",
+      "warranty": "Anycubic peut refuser le support si Rinkhals est détecté. MAIS : (1) c'est désinstallable proprement avant un retour SAV, (2) en droit européen (directive 2019/771, applicable en Belgique), un vendeur ne peut refuser la garantie légale de 2 ans que s'il prouve que le défaut vient de la modification — un firmware overlay n'a aucun lien avec une panne mécanique. En pratique : désactive/retire Rinkhals avant tout contact SAV et n'en parle pas.",
+      "stability": "Chaque app/client web connecté ralentit la machine (CPU embarqué modeste) et peut crasher l'UI — la doc le dit explicitement. Installer Mainsail + caméra + OctoEverywhere + Spoolman + 3 onglets ouverts = mauvaise idée. Rester minimaliste.",
+      "klipper_direct": "Modifs Klipper directes (printer.cfg via SSH) : non supportées, c'est là que les gens cassent des trucs. À éviter au début."
+    },
+    "verdict": "Sur la S1 c'est LE mod n°1, mature (releases mensuelles, communauté active), réversible. À faire une fois la machine apprivoisée en stock 2-3 semaines, pas le jour 1.",
+    "sources": [
+      "https://github.com/jbatonnet/Rinkhals",
+      "https://github.com/rinkhals-community/Rinkhals/releases",
+      "https://jbatonnet.github.io/Rinkhals/",
+      "https://blog.octoeverywhere.com/how-to-install-klipper-on-your-anycubic-3d-printer/",
+      "https://github.com/jbatonnet/Rinkhals/issues/222"
+    ]
+  },
+  "exit_cloud": [
+    {
+      "level": "Mode LAN officiel Anycubic",
+      "description": "Sans rien modder : la S1 a un mode LAN qui cause uniquement avec Anycubic Slicer Next (envoi de prints, suivi, vidéo) en local, sans cloud.",
+      "limit": "Tu es enfermé dans le slicer Anycubic.",
+      "link": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting"
+    },
+    {
+      "level": "Rinkhals",
+      "description": "Moonraker expose l'API standard → Mainsail/Fluidd dans le navigateur, OrcaSlicer en direct, zéro dépendance cloud. C'est la vraie libération."
+    },
+    {
+      "level": "Accès distant sans cloud",
+      "description": "Via les apps Rinkhals — Tailscale (VPN mesh, le plus propre), Cloudflare Tunnel, ou OctoEverywhere (pratique mais c'est re-déléguer à un cloud tiers)."
+    }
+  ],
+  "orca_network": {
+    "without_rinkhals": "Impossible. Orca ne sait pas parler au protocole LAN propriétaire de la S1 (discussion OrcaSlicer #8568). Tu slices dans Orca → export gcode → clé USB ou re-import, pénible.",
+    "with_rinkhals": "Tu déclares la S1 comme imprimante « Klipper/Moonraker » dans Orca (IP de la machine) → envoi direct, suivi, et le print lancé depuis Orca s'affiche normalement sur l'écran tactile. Le multicolor ACE marche (fichier .acm auto).",
+    "sources": [
+      "https://github.com/OrcaSlicer/OrcaSlicer/discussions/8568",
+      "https://jbatonnet.github.io/Rinkhals/guides/orca-slicer-usage/"
+    ]
+  },
+  "home_assistant": {
+    "via_rinkhals": "Recommandé : Moonraker tourne sur la S1 → l'intégration HA Moonraker (HACS) remonte état, températures, progression, caméra, et permet pause/stop. C'est l'intégration Klipper standard, très mature. Quelques frictions historiques rapportées sur Kobra (socket gklib non standard, issue #225), largement améliorées dans les releases 2026 (« Moonraker host control resilience »).",
+    "via_rinkhals_issue": "https://github.com/jbatonnet/Rinkhals/issues/225",
+    "without_rinkhals": "Composant HACS Anycubic Cloud (état + carte frontend) — mais ça passe par le cloud Anycubic, dépendant de leur API, support S1 à vérifier au cas par cas. ⚠️ Moins fiable, à considérer comme un dépannage.",
+    "without_rinkhals_link": "https://community.home-assistant.io/t/anycubic-cloud-component-frontend-card/742295"
+  },
+  "printable_mods": {
+    "reference_collections": [
+      "https://makerworld.com/en/collections/6659265-anycubic-kobra-s1-upgrades",
+      "https://makerworld.com/en/collections/6061654-anycubic-kobra-s1"
+    ],
+    "discussion_thread": {
+      "note": "Fil de discussion utile (DE, traduisible) qui agrège les mods testés du Combo : drucktipps3d — Nützliche Modifikationen für den Kobra S1 Combo.",
+      "link": "https://forum.drucktipps3d.de/forum/thread/42708-n%C3%BCtzliche-modifikationen-f%C3%BCr-den-kobra-s1-combo/"
+    },
+    "ace_pro": [
+      {
+        "mod": "ACE Pro Filament Saver & Alignment (3Dwork.io)",
+        "why": "LE mod ACE le plus connu. Guide de bobine + butée anti-mouvement → réduit les fausses alertes « filament feed » et les bourrages, surtout bobines carton ou presque vides.",
+        "links": [
+          "https://www.printables.com/model/1140105-anycubic-ace-pro-filament-saver-alignment",
+          "https://makerworld.com/en/models/967734-anycubic-ace-pro-filament-saver-alignment"
+        ]
+      },
+      {
+        "mod": "ACE Pro Filament Guide (sans vis)",
+        "why": "Même but, se colle au double-face dans le couvercle — pour les ACE sans trous de vis.",
+        "links": [
+          "https://makerworld.com/en/models/1627161-anycubic-ace-pro-filament-guide-no-screws"
+        ]
+      },
+      {
+        "mod": "Boîte à silica gel + hygromètre",
+        "why": "Le dessiccant en sachets libres dans l'ACE, c'est nul. Boîte dédiée + emplacement capteur temp/humidité → tu SAIS si tes bobines sont au sec.",
+        "links": [
+          "https://makerworld.com/en/models/1222801-anycubic-kobra-s1-combo-ace-pro-silica-gel-box",
+          "https://www.printables.com/model/1317868-anycubic-kobra-s1-ace-pro-humidity-sensor-silica-g",
+          "https://makerworld.com/en/models/1234091-hygrometer-display-stand-anycubic-kobra-s1-ace-pro"
+        ]
+      },
+      {
+        "mod": "Plateau de séchage du dessiccant",
+        "why": "Pour régénérer le silica au four proprement.",
+        "links": [
+          "https://makerworld.com/en/models/1434976-anycubic-ace-pro-desiccant-drying-tray"
+        ]
+      }
+    ],
+    "filament_path_ptfe": [
+      {
+        "mod": "PTFE Guide and Protection",
+        "why": "Améliore l'angle d'entrée du filament dans l'extrudeur + protège le PTFE du frottement contre le capot. Sans supports. Quasi indispensable.",
+        "links": [
+          "https://makerworld.com/en/models/1220595-anycubic-kobra-s1-ptfe-guide-and-protection"
+        ]
+      },
+      {
+        "mod": "Hub 5-vers-1 (zpin)",
+        "why": "Remplace le hub 4→1 stock : ajoute un 5ᵉ port pour une bobine manuelle → tu peux imprimer TPU et filaments exotiques que l'ACE Pro ne digère pas sans rien débrancher. Mod malin n°1 du Combo.",
+        "links": [
+          "https://www.printables.com/model/1291687-5-to-1-filament-hub-for-anycubic-kobra-s1-combo",
+          "https://www.thingiverse.com/thing:7037079"
+        ]
+      },
+      {
+        "mod": "Side spool holder (porte-bobine latéral)",
+        "why": "Bobine externe en direct (TPU notamment — le TPU ne passe PAS par l'ACE Pro, limitation officielle) avec déroulement fluide.",
+        "links": [
+          "https://makerworld.com/en/models/1330385-side-spool-holder-anycubic-kobra-s1",
+          "https://makerworld.com/en/models/2152469-anycubic-kobra-s1-side-spool-holder-with-riser"
+        ]
+      },
+      {
+        "mod": "Improved Spool Holder",
+        "why": "Le porte-bobine arrière stock déroule mal ; celui-ci ajoute une vraie rotation fluide.",
+        "links": [
+          "https://www.printables.com/model/1336673-improved-spool-holder-for-anycubic-kobra-s1-3d-pri"
+        ]
+      }
+    ],
+    "chassis_comfort": [
+      {
+        "mod": "Pieds anti-vibration (MisterTLX)",
+        "why": "Moins de bruit transmis au meuble, meilleure stabilité, flux d'air sous la machine.",
+        "links": [
+          "https://www.printables.com/model/1217694-anycubic-kobra-s1-anti-vibration-foot-pads",
+          "https://www.thingiverse.com/thing:6964845"
+        ]
+      },
+      {
+        "mod": "Pieds HULA v1.0 (Gwebster)",
+        "why": "Variante « HULA » (découplage vibratoire inspiré Voron) — gros gain bruit.",
+        "links": [
+          "https://www.printables.com/model/1425160-anycubic-kobra-s1-s1c-hula-v10-anti-vibration-feet/related"
+        ]
+      },
+      {
+        "mod": "Riser (rehausse)",
+        "why": "Surélève la S1 (~15 cm) : tiroirs de rangement, support de plaques de build, meilleur accès. ⚠️ Gourmand : ~2 kg de filament.",
+        "links": [
+          "https://cults3d.com/en/3d-model/tool/anycubic-kobra-s1-riser",
+          "https://cults3d.com/en/3d-model/tool/anycubic-kobra-s1-d3p-riser"
+        ]
+      },
+      {
+        "mod": "Poignées / handle upgrade",
+        "why": "La S1 fait ~24 kg avec l'ACE dessus, zéro prise stock — poignées imprimées pour la déplacer sans se casser le dos.",
+        "links": [
+          "https://makerworld.com/en/collections/6659265-anycubic-kobra-s1-upgrades"
+        ]
+      },
+      {
+        "mod": "Bracket capteur temp/humidité de chambre",
+        "why": "Monitorer la température de chambre (utile ABS/ASA, machine fermée).",
+        "links": [
+          "https://makerworld.com/en/models/1395349-kobra-s1-chamber-temp-humidity-sensor-bracket"
+        ]
+      }
+    ],
+    "machine_specific_s1": [
+      {
+        "mod": "Purge Poop Chute by SAC3D",
+        "why": "Goulotte de purge qui guide proprement les crottes dans un seau détachable — fini les purges qui rebondissent partout, installation en 2 vis existantes.",
+        "difficulty": "facile",
+        "time": "2-4 h",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/2407913-anycubic-kobra-s1-purge-poop-chute-by-sac3d"
+        ]
+      },
+      {
+        "mod": "Door Holder Kobra S1 / S1C",
+        "why": "Verrouille la porte en position ouverte OU fermée (push-tourne-push) — indispensable pour imprimer du PLA porte ouverte sans qu'elle se referme toute seule.",
+        "difficulty": "très facile",
+        "time": "~1 h",
+        "requires": "",
+        "links": [
+          "https://www.printables.com/model/1331214-door-holder-anycubic-kobra-s1-s1c"
+        ]
+      },
+      {
+        "mod": "Kobra S1 Slide Screen Cover",
+        "why": "Protection d'écran coulissante qui sauve la dalle tactile de la poussière, des rayures et des doigts pleins de graisse.",
+        "difficulty": "très facile",
+        "time": "~1 h",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/1218514-kobra-s1-slide-screen-cover"
+        ]
+      },
+      {
+        "mod": "Hotend Nozzle Box Kobra S1",
+        "why": "Boîte fermée par aimants pour ranger hotends et buses de rechange S1 — chaque pièce a son logement, rien ne se balade.",
+        "difficulty": "facile",
+        "time": "2-3 h",
+        "requires": "aimants",
+        "links": [
+          "https://makerworld.com/en/models/1367058-hotend-nozzle-box-kobra-s1"
+        ]
+      },
+      {
+        "mod": "Tool Head Cover Maintenance Jig",
+        "why": "Support qui tient le capot avant de la tête pendant un changement de buse — le capot pend au bout de sa nappe sinon, et c'est comme ça qu'on l'arrache.",
+        "difficulty": "très facile",
+        "time": "~1 h",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/1490475-anycubic-kobra-s1-s1c-tool-head-cover-maintenance"
+        ]
+      },
+      {
+        "mod": "NFC Cardboard Spool Adapter Ring (ACE Pro)",
+        "why": "Anneaux 5 g / 20 min qui rendent les bobines carton compatibles ACE Pro (et logent un tag NFC) — fini les bobines carton qui patinent dans l'ACE.",
+        "difficulty": "très facile",
+        "time": "20 min/anneau",
+        "requires": "tag NFC (optionnel)",
+        "links": [
+          "https://makerworld.com/en/models/1266132-nfc-cardboard-spool-adapter-ring-ace-pro"
+        ]
+      },
+      {
+        "mod": "Dial Indicator Mount 60 mm",
+        "why": "Monte un comparateur sur la tête pour tramer le lit et vérifier la planéité du plateau comme un pro — le mod calibration ultime.",
+        "difficulty": "moyen",
+        "time": "2-3 h",
+        "requires": "comparateur à cadran 60 mm (~10-15 €)",
+        "links": [
+          "https://makerworld.com/en/models/1543729-anycubic-kobra-s1-dial-indicator-mount-60mm"
+        ]
+      },
+      {
+        "mod": "Kobra S1 Camera Mount (externe)",
+        "why": "Fixe une vraie caméra externe derrière la poignée de porte avant — angle de vue enfin correct pour surveiller et faire des timelapses propres.",
+        "difficulty": "facile",
+        "time": "1-2 h",
+        "requires": "caméra externe",
+        "links": [
+          "https://www.printables.com/model/1314947-kobra-s1-camera-mount"
+        ]
+      },
+      {
+        "mod": "LED Holders for Kobra S1",
+        "why": "Clips de maintien pour strip LED dans la chambre — l'adhésif des strips lâche toujours avec la chaleur, ces clips règlent le problème définitivement.",
+        "difficulty": "très facile",
+        "time": "~30 min",
+        "requires": "strip LED",
+        "links": [
+          "https://www.printables.com/model/1394900-led-holders-for-kobra-s1"
+        ]
+      },
+      {
+        "mod": "Fan Duct with LED Lighting",
+        "why": "Duct de ventilation refondu avec LED intégrées pointées sur la buse — tu vois enfin ce que la machine imprime, en plus d'un meilleur flux d'air.",
+        "difficulty": "moyen",
+        "time": "3-4 h",
+        "requires": "strip LED + petit câblage",
+        "links": [
+          "https://www.printables.com/model/1332479-kobra-s1-fan-duct-with-led-lighting"
+        ]
+      },
+      {
+        "mod": "HEPA Filter Upgrade Kit",
+        "why": "Logement pour filtre HEPA 80×40×15 mm sur l'extraction — coupe les particules fines, le mod santé à 2 € de filtre.",
+        "difficulty": "facile",
+        "time": "1-2 h",
+        "requires": "filtre HEPA 80×40×15 mm",
+        "links": [
+          "https://makerworld.com/en/models/1004057-anycubic-kobra-s1-hepa-filter-upgrade-kit"
+        ]
+      },
+      {
+        "mod": "Exhaust Port Adapter (magnétique)",
+        "why": "Adaptateur magnétique à l'arrière pour brancher une gaine d'extraction vers la fenêtre — zéro perçage, zéro scotch, fumées dehors.",
+        "difficulty": "facile",
+        "time": "2-3 h",
+        "requires": "aimants 48×21×10",
+        "links": [
+          "https://makerworld.com/en/models/1810485-anycubic-kobra-s1-exhaust-port-adapter"
+        ]
+      },
+      {
+        "mod": "Extruder PTFE Tube Guide",
+        "why": "Guide d'entrée extrudeur au rayon adouci qui empêche le tube PTFE de s'user en frottant — complète le PTFE Guide & Protection déjà installé.",
+        "difficulty": "facile",
+        "time": "~1 h",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/1440535-kobra-s1-extruder-ptfe-tube-guide"
+        ]
+      },
+      {
+        "mod": "Four-Position PTFE Cable Clip (S1 + ACE Pro)",
+        "why": "Clip 4 positions qui discipline les tubes PTFE de l'ACE Pro le long de la machine — fini le plat de spaghettis derrière le combo.",
+        "difficulty": "très facile",
+        "time": "~30 min",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/1253656-four-position-ptfe-cable-clip-for-anycubic-kobra-s"
+        ]
+      },
+      {
+        "mod": "FNT Simple Buildplate Holder (à éjection)",
+        "why": "Range-plaque PEI avec bouton éjecteur : la plaque sort de 2 cm d'une pression, tu la saisis sans mettre les doigts sur la surface d'impression.",
+        "difficulty": "facile",
+        "time": "3-4 h",
+        "requires": "",
+        "links": [
+          "https://makerworld.com/en/models/2193585-fnt-anycubic-kobra-s1-simple-buildplate-holder"
+        ]
+      }
+    ]
+  },
+  "tuning_notes": {
+    "source": "tuning-kobra-s1.md",
+    "links_verified": "2026-06-12",
+    "notes": [
+      "Pas de [MULTI] ici : ce sont des mods fonctionnels mono-couleur. Si tu veux du bicolore (ex. screen cover avec logo), fais-le par changement de couleur à la hauteur dans le slicer — purge quasi nulle — plutôt que du multi-couleur par couche.",
+      "#7 (comparateur) demande un comparateur à cadran 60 mm (~10-15 €) ; #10, #11, #12 demandent du consommable (strip LED, filtre HEPA 80×40×15, aimants 48×21×10).",
+      "Aucun modèle de cette fournée n'exploite vraiment le multi-couleur sans purge → imprime-les mono-couleur, c'est gratuit."
+    ],
+    "collections_a_ecumer": [
+      {
+        "nom": "Anycubic Kobra S1 Upgrades (MakerWorld)",
+        "url": "https://makerworld.com/en/collections/6659265"
+      },
+      {
+        "nom": "Kobra S1 Mods (MakerWorld)",
+        "url": "https://makerworld.com/en/collections/15387231"
+      },
+      {
+        "nom": "Recherche Kobra S1 (Printables)",
+        "url": "https://www.printables.com/search/models?q=kobra%20s1"
+      }
+    ]
+  },
+  "upgrades_worth_it": [
+    {
+      "rank": 1,
+      "item": "Rinkhals",
+      "why": "Gratuit, réversible, transforme la machine (Orca réseau + caméra + HA + plus de cloud). Le meilleur ratio bénéfice/risque de toute cette page."
+    },
+    {
+      "rank": 2,
+      "item": "Mods anti-galère ACE Pro (filament saver + guide PTFE)",
+      "why": "2 h d'impression, élimine les pannes les plus fréquentes du Combo rapportées par la communauté."
+    },
+    {
+      "rank": 3,
+      "item": "Gestion dessiccant + hygromètre (~10 € de capteur + un print)",
+      "why": "Le PETG/PA humide est la cause n°1 de prints moches ; l'ACE Pro sèche, mais sans mesure tu pilotes à l'aveugle."
+    },
+    {
+      "rank": 4,
+      "item": "Hub 5-to-1 ou side spool + bypass",
+      "why": "Dès que tu veux du TPU (l'ACE Pro ne le gère pas), c'est obligatoire de toute façon."
+    },
+    {
+      "rank": 5,
+      "item": "Pieds anti-vibration",
+      "why": "Si la machine est sur un meuble qui résonne. Gratuit (chutes de TPU)."
+    },
+    {
+      "rank": 6,
+      "item": "Buses de rechange officielles (0.4 spare + une 0.6 pour les gros prints/filaments chargés)",
+      "why": "Consommable, pas vraiment un « upgrade », mais à avoir d'avance."
+    }
+  ],
+  "upgrades_gadgets_avoid": [
+    {
+      "item": "Riser à tiroirs",
+      "why": "Joli sur Insta, ~2 kg de filament (~40 €) et des jours d'impression pour… des tiroirs. Surélever la machine peut aussi amplifier le wobble si le meuble n'est pas rigide. À faire seulement si tu manques vraiment de rangement."
+    },
+    {
+      "item": "Modifs Klipper profondes via SSH (accélérations, input shaping custom…)",
+      "why": "La S1 tourne sur un Klipper fermé (gklib) déjà tuné usine ; bidouiller = source n°1 de casse signalée sur le repo, gain marginal."
+    },
+    {
+      "item": "Caméras USB additionnelles",
+      "why": "Alors que la caméra intégrée suffit pour du monitoring — charge CPU en plus, crashs UI possibles."
+    },
+    {
+      "item": "Upgrades mécaniques (rails, extrudeur tiers…)",
+      "why": "Inutiles, la S1 est une CoreXY récente et fermée — rien de prouvé côté communauté à ce jour, et là tu flingues vraiment la garantie."
+    }
+  ],
+  "implementation_checklist": [
+    "1. Machine en stock 2-3 semaines, noter la version firmware exacte.",
+    "2. Imprimer en stock : filament saver ACE + guide PTFE + boîte silica/hygromètre + pieds.",
+    "3. Vérifier sur rinkhals-community/releases que la version firmware est supportée → installer Rinkhals (clé USB FAT32/MBR, dossier `aGVscF9zb3Nf`, `update.swu`).",
+    "4. Configurer Orca → imprimante Moonraker (IP locale) ; tester un print mono puis multicolor ACE.",
+    "5. Brancher HA via l'intégration Moonraker. Optionnel : Tailscale pour l'accès distant.",
+    "6. Désactiver les MAJ auto Anycubic / ne jamais updater sans vérifier la compat Rinkhals.",
+    "7. Plus tard, si TPU : hub 5-to-1 + side spool."
+  ],
+  "uncertainties": [
+    "Les versions firmware supportées évoluent chaque mois — ce doc est daté du 10/06/2026, toujours re-vérifier les release notes rinkhals-community avant d'agir.",
+    "La position officielle d'Anycubic sur la garantie avec Rinkhals n'est documentée nulle part publiquement ; le raisonnement « droit EU + désinstallation avant SAV » est pragmatique, pas une certitude juridique.",
+    "Le support S1 dans le composant HA Anycubic Cloud (sans Rinkhals) n'est pas confirmé explicitement — testé surtout sur Kobra 3.",
+    "Stats de fiabilité des mods : basées sur retours communautaires (likes/makes, forums), pas sur des tests contrôlés."
+  ],
+  "sources": [
+    "https://github.com/jbatonnet/Rinkhals",
+    "https://github.com/rinkhals-community/Rinkhals/",
+    "https://github.com/rinkhals-community/Rinkhals/releases",
+    "https://jbatonnet.github.io/Rinkhals/",
+    "https://jbatonnet.github.io/Rinkhals/guides/orca-slicer-usage/",
+    "https://jbatonnet.github.io/Rinkhals/printers/recover-boot-issues/",
+    "https://github.com/jbatonnet/Rinkhals/issues/222",
+    "https://github.com/jbatonnet/Rinkhals/issues/225",
+    "https://github.com/jbatonnet/Rinkhals/issues/433",
+    "https://blog.octoeverywhere.com/how-to-install-klipper-on-your-anycubic-3d-printer/",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting",
+    "https://github.com/OrcaSlicer/OrcaSlicer/discussions/8568",
+    "https://community.home-assistant.io/t/anycubic-cloud-component-frontend-card/742295",
+    "https://makerworld.com/en/collections/6659265-anycubic-kobra-s1-upgrades",
+    "https://makerworld.com/en/collections/6061654-anycubic-kobra-s1",
+    "https://forum.drucktipps3d.de/forum/thread/42708-n%C3%BCtzliche-modifikationen-f%C3%BCr-den-kobra-s1-combo/"
+  ]
+}

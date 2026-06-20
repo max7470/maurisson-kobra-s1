@@ -1,0 +1,250 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "slicer",
+    "source_md": ["05-slicer-et-profils.md", "01-machine-et-wiki.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr",
+    "note_sources": "Sources croisées : wiki Anycubic, GitHub OrcaSlicer/Rinkhals, reviews (Tom's Hardware, VoxelMatters, 3DWithUs, Creative Bloq), profils communautaires. Les pages wiki.anycubic.com bloquent parfois le fetch direct (403) mais sont accessibles en navigateur."
+  },
+  "strategy_tldr": [
+    {
+      "need": "Démarrer vite, multi-couleur ACE Pro sans prise de tête, envoi LAN/cloud",
+      "tool": "Anycubic Slicer Next (ASN)",
+      "detail": "C'est un fork d'OrcaSlicer, donc l'interface est quasi identique."
+    },
+    {
+      "need": "Calibrations poussées (PA, flow, temp tower), profils communautaires, contrôle total",
+      "tool": "OrcaSlicer",
+      "detail": "Profils Kobra S1 inclus dans les versions récentes."
+    },
+    {
+      "need": "OrcaSlicer avec envoi réseau direct + interface web Fluidd/Mainsail",
+      "tool": "OrcaSlicer + firmware custom Rinkhals",
+      "detail": "Overlay réversible."
+    }
+  ],
+  "recommended_strategy": "Stratégie recommandée par la communauté : commencer sur ASN (le multi-couleur ACE Pro y est natif et le calcul de purge automatique), puis passer à Orca quand on veut optimiser — soit en exportant le G-code sur clé USB, soit en installant Rinkhals pour l'envoi LAN direct. ASN fait le job mais Orca reste la référence pour la qualité.",
+  "asn_vs_orca": {
+    "asn": {
+      "description": "ASN = fork open-source d'OrcaSlicer optimisé pour les machines Anycubic. Interface quasi identique à Orca.",
+      "adds": [
+        "Compte Anycubic + impression à distance via cloud, monitoring vidéo, contrôle machine, gestion de fichiers cloud",
+        "Mode LAN : officiellement, seul ASN supporte l'envoi en réseau local vers la S1 en firmware stock",
+        "Calcul automatique des volumes de purge entre couleurs (algorithme basé sur couleur + type des deux filaments)",
+        "Outil maison : Adaptive Pressure Advance",
+        "Outil maison : YOLO Flow Calibration"
+      ],
+      "criticism": "Les reviewers sont durs avec ASN : Tom's Hardware titre carrément que « son slicer nous fait pleurer » (bugs, lourdeur, dépendance au cloud Anycubic). Il fait le job, mais Orca reste la référence pour la qualité.",
+      "sources": [
+        "https://wiki.anycubic.com/en/software-and-app/new-page-anycubic-slicer-beta(orca-version)",
+        "https://wiki.anycubic.com/en/software-and-app/new-page-anycubic-slicer-beta(orca-version)/anycubic-slicer-next-(orca-version)-update-record",
+        "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/lan-connection-guide"
+      ]
+    },
+    "orca": {
+      "description": "OrcaSlicer = la référence qualité. Profils Kobra S1 inclus dans les versions récentes (2.3+).",
+      "better_at": [
+        "Calibrations plus complètes et éprouvées (PA tower, flow rate pass 1/2, temp tower, retraction test, VFA)",
+        "Profils pour des centaines de machines",
+        "Intégration Klipper",
+        "Mises à jour plus fréquentes",
+        "Pas de dépendance cloud"
+      ],
+      "sources": ["https://www.obico.io/blog/orca-slicer-download/"]
+    }
+  },
+  "connect_to_orca": {
+    "intro": "Connecter la S1 à OrcaSlicer — 3 options.",
+    "option_a_stock_no_network": {
+      "name": "Option A — Firmware stock, sans réseau (la plus simple)",
+      "steps": [
+        "Dans Orca : ajouter l'imprimante Anycubic Kobra S1 (présente dans les versions récentes d'Orca ; sinon profils communautaires, voir orca_profiles).",
+        "Slicer dans Orca → exporter le G-code → clé USB → imprimer.",
+        "Variante : importer le G-code dans ASN et l'envoyer en LAN/cloud depuis là."
+      ],
+      "warning": "Point de vigilance multi-couleur en firmware stock : le G-code de changement de filament du profil Orca par défaut ne collait pas exactement à celui d'ASN — vérifier/mettre à jour le « machine change filament G-code » (issue ouverte : OrcaSlicer #11632, https://github.com/OrcaSlicer/OrcaSlicer/issues/11632)."
+    },
+    "option_b_rinkhals": {
+      "name": "Option B — Firmware custom Rinkhals (la voie royale, choix de la communauté)",
+      "description": "Rinkhals (https://github.com/jbatonnet/Rinkhals) est un overlay sur le firmware Anycubic (Kobra S1 supporté, firmwares testés 2.7.0.9 et 2.7.2.7) : il garde l'écran tactile et les fonctions stock, et ajoute Moonraker + Mainsail/Fluidd + caméra USB (mjpg-streamer) + VNC + mDNS.",
+      "steps": [
+        "Télécharger Orca depuis le GitHub officiel (éviter les sites miroirs type orcaslicer.net).",
+        "Sélectionner le preset Kobra S1 (Combo) — seuls Kobra 3 et Kobra S1 ont des presets dédiés côté Rinkhals.",
+        "Bouton Connexion (icône WiFi dans la section imprimante) → entrer uniquement l'IP locale de la S1, laisser le reste vide → Test.",
+        "Mettre une IP statique sur le routeur (sinon déconnexions).",
+        "Fluidd ou Mainsail doit tourner sur l'imprimante (apps activées dans Rinkhals).",
+        "Envoi direct depuis Orca ; l'écran d'impression s'affiche sur la machine. L'onglet « Device » d'Orca donne accès à Mainsail/Fluidd."
+      ],
+      "bonus_ace": "Bonus Rinkhals + ACE Pro : un driver communautaire publie l'inventaire des 4 slots (type + couleur) vers Moonraker (lane_data), et les builds récents d'Orca peuvent pré-remplir automatiquement les filaments (https://github.com/Kobra-S1/ACEPRO). Encore jeune — à considérer comme expérimental.",
+      "warning": "Rinkhals = firmware non officiel : risque théorique pour la garantie, mais overlay désinstallable. Très largement adopté par les possesseurs de S1.",
+      "doc_source": "https://github.com/jbatonnet/Rinkhals/blob/master/docs/docs/guides/orca-slicer-usage.md"
+    },
+    "option_c_asn_only": {
+      "name": "Option C — Rester 100 % ASN",
+      "description": "LAN + cloud + multi-couleur natifs, zéro bidouille. C'est l'option « ça marche tout de suite », au prix d'un slicer moins abouti."
+    },
+    "sources": [
+      "https://jbatonnet.github.io/Rinkhals/",
+      "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting",
+      "https://github.com/OrcaSlicer/OrcaSlicer/issues/7961"
+    ]
+  },
+  "orca_profiles": [
+    {
+      "name": "Profil officiel Orca",
+      "note": "« Anycubic Kobra S1 » est inclus dans les versions récentes (2.3+). Bon point de départ, mais G-code de changement de filament à vérifier (cf. connect_to_orca.option_a_stock_no_network)."
+    },
+    {
+      "name": "MPC561",
+      "url": "https://github.com/MPC561/Anycubic-Kobra-S1-Orcaslicer-Profiles",
+      "summary": "Le plus complet côté communauté.",
+      "details": [
+        "Profil imprimante avec start G-code amélioré (nettoyage buse avant probe + « bubble » de pré-extrusion → meilleur Z-offset et première couche)",
+        "Process en 0.08 / 0.12 / 0.16 / 0.20 / 0.24 mm, chacun en 3 niveaux (Standard rapide / Medium / Structural précis)",
+        "Filaments : PLA, PETG (generic, Jayo, Deeply), ABS (generic, eSun), ASA (generic, Eryone), PETG-CF",
+        "Débits volumétriques relevés : PETG jusqu'à 23 mm³/s, ABS 28 mm³/s (vs 12–15 mm³/s sur les profils Anycubic, jugés très conservateurs)",
+        "Rétraction réduite à ~1,5 mm → valeurs plus basses pour limiter les défauts (au prix d'un peu plus de stringing)"
+      ]
+    },
+    {
+      "name": "ditschi",
+      "url": "https://github.com/ditschi/OrcaSlicer-user-profiles",
+      "note": "Autre set Kobra S1 Combo, plus simple."
+    }
+  ],
+  "speeds": {
+    "marketing": "600 mm/s en pointe, 20 000 mm/s² d'accélération (atteignables en pointe sur des segments courts). La machine recommande 300 mm/s.",
+    "reality": [
+      {"situation": "PLA qualité correcte, usage courant", "speed": "200–300 mm/s"},
+      {"situation": "Pièces où la qualité prime", "speed": "150–250 mm/s"},
+      {"situation": "Pousser la machine (pièces simples)", "speed": "300–400 mm/s"},
+      {"situation": "Multi-couleur ACE Pro", "speed": "150–200 mm/s effectifs (les changements de filament dominent le temps d'impression de toute façon)"}
+    ],
+    "note": "Sur un print multi-couleur, le goulot n'est pas la vitesse de dépose mais les changements de filament (~1 min 30 à 2 min par swap). Optimiser la purge rapporte plus que monter la vitesse.",
+    "sources": [
+      "https://www.voxelmatters.com/anycubic-kobra-s1-review-no-fuss-corexy-for-speed-and-reliability/",
+      "https://www.ryanmercer.com/ryansthoughts/2025/10/29/anycubic-kobra-s1-combo-review-the-budget-multi-color-beast",
+      "https://blog.linuxniche.com/2025/03/anycubic-kobra-s1-review/",
+      "https://3dwithus.com/anycubic-kobra-s1-combo-review-3d-printer-tests-tips-and-settings"
+    ]
+  },
+  "multicolor_purge": {
+    "how_it_works": "À chaque changement de couleur, l'ancienne couleur est chassée de la buse → déchet (« poop » éjecté à l'arrière + tour de purge). ASN/Orca calculent un volume de purge automatique par paire de couleurs (matrice N×N) : foncé → clair = beaucoup de purge, clair → foncé = peu.",
+    "levers": [
+      {
+        "lever": "Flush multiplier",
+        "detail": "La matrice auto est volontairement large. Descendre le multiplicateur à 0,4–0,6 et tester ; remonter si du bleeding apparaît. (Réglage aussi accessible pendant l'impression dans les paramètres ACE Pro de la machine, à doser prudemment.)"
+      },
+      {
+        "lever": "Matrice manuelle",
+        "detail": "Plafonner les pires paires (ex. noir→blanc) plutôt que tout baisser uniformément. ASN recommande de rester ≤ 900 mm³ par paire."
+      },
+      {
+        "lever": "« Flush into objects' infill » et « flush into objects »",
+        "detail": "(Orca, onglet Others) : purger dans le remplissage / les supports au lieu de jeter — gratuit, à activer quasi systématiquement quand l'infill est invisible."
+      },
+      {
+        "lever": "Tour de purge (prime tower)",
+        "detail": "Réduire sa largeur (35 → 25 mm) et activer « purge dans l'infill » d'abord ; la tour ne sert qu'au reliquat."
+      },
+      {
+        "lever": "Ordonner les couleurs",
+        "detail": "Peindre le modèle pour que les transitions claires→foncées dominent (le sens foncé→clair coûte cher)."
+      },
+      {
+        "lever": "Regrouper par couleur / par hauteur",
+        "detail": "Quand c'est possible, séparer les zones de couleur en hauteur (logo bicolore : changement à la couche N = 1 seul swap) plutôt qu'en damier (swaps à chaque couche). Pour des objets distincts monocouleurs : imprimer « one by one » ou par plaques séparées plutôt qu'un print multi-couleur."
+      },
+      {
+        "lever": "Bac à poop grand volume",
+        "detail": "Imprimer un bac à poop grand volume (modèle Printables dédié S1 : https://www.printables.com/model/1290304-anycubic-kobra-s1-large-volume-filament-waste-purg) — ne réduit pas le déchet mais évite le débordement."
+      }
+    ],
+    "ref_video": "Vidéo de référence sur l'optimisation des flush amounts S1 : « This printer poops too much » — https://www.youtube.com/watch?v=i5ce2Ow3F3M",
+    "uncertainty": "Il n'existe pas de « bonne valeur » universelle de flush multiplier — 0,4–0,6 est le point de départ communautaire courant, mais ça dépend des marques de filament et des paires de couleurs. Tester sur un print 2 couleurs sacrificiel.",
+    "sources": [
+      "https://wiki.anycubic.com/en/home/knowledge-sharing/reduce-waste",
+      "https://www.tomshardware.com/3d-printing/anycubic-kobra-s1-review",
+      "https://www.creativebloq.com/3d/anycubic-kobra-s1-combo-review-excellent-when-it-works-frustrating-when-it-doesnt"
+    ]
+  },
+  "tpu_and_ace": {
+    "intro": "TPU et ACE Pro : ils ne font PAS bon ménage (confirmé officiel, wiki Anycubic).",
+    "rules": [
+      "Ne jamais alimenter du TPU via l'ACE Pro : le filament souple flambe/se coince dans les canaux de l'ACE → échec d'alimentation. (Même restriction sur l'ACE 2 Pro.)",
+      "TPU ≥ 95A uniquement sur la S1. TPU ≤ 85A : interdit (écrasé par la roue d'extrusion → bouchon).",
+      "Procédure : bobine TPU sur le support arrière, retirer le tube bowden du hub de filament et de la tête, insérer le filament en direct par le tube PTFE arrière jusqu'à l'extrudeur.",
+      "Réglages TPU S1 : buse 220–230 °C, vitesse basse (rester ≤ 100 mm/s, le wiki insiste : vitesse élevée = bourrage), imprimer les modèles un par un plutôt qu'en plein plateau, rétraction faible.",
+      "Sécher le TPU avant : 50–55 °C pendant 4–6 h dans l'ACE Pro (le séchage dans l'ACE est OK, c'est juste l'alimentation qui ne l'est pas)."
+    ],
+    "summary": "L'ACE Pro reste une station 4 couleurs PLA/PETG ; le TPU = mono-couleur en direct.",
+    "hub_5in1": "Il existe un hub 5-en-1 communautaire pour garder une voie manuelle permanente : https://www.printables.com/model/1291687-5-to-1-filament-hub-for-anycubic-kobra-s1-combo",
+    "sources": [
+      "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/tpu-printing-guide",
+      "https://wiki.anycubic.com/en/home/knowledge-sharing/tpu-printing-recommendations",
+      "https://store.anycubic.com/products/ace-2-pro"
+    ]
+  },
+  "ace_drying": {
+    "max_temp_c": 55,
+    "during_print": true,
+    "description": "L'ACE Pro (celui du S1 Combo) sèche jusqu'à 55 °C max — y compris pendant l'impression. C'est suffisant pour PLA/TPU/PETG ; insuffisant pour vraiment sécher ABS/ASA/Nylon/PC (mais OK pour les maintenir secs s'ils sont déjà en bon état). L'ACE 2 Pro monte à 65–70 °C, pas l'ACE Pro v1.",
+    "table": [
+      {"material": "PLA", "temp": "45–50 °C", "duration": "4–6 h", "note": "au-delà de 50 °C, risque de ramollir le PLA"},
+      {"material": "PETG", "temp": "55 °C (max machine)", "duration": "6–7 h", "note": "l'idéal serait 65 °C — l'ACE Pro plafonne, prévoir plus long"},
+      {"material": "TPU", "temp": "50–55 °C", "duration": "4–6 h", "note": "recommandation officielle Anycubic avant tout print TPU"},
+      {"material": "ABS/ASA", "temp": "55 °C (max)", "duration": "maintien seulement", "note": "vrai séchage = 75–80 °C → dryer externe nécessaire"}
+    ],
+    "tip": "Réflexe pratique : activer le séchage à 50–55 °C pendant les longs prints PETG — gros gain de qualité (moins de stringing/bulles), surtout en Belgique humide.",
+    "uncertainty": "Durées PLA/PETG = consensus général (Overture, Bambu, Sovol convergent), Anycubic ne publie de durée officielle que pour le TPU (4–6 h).",
+    "sources": [
+      "https://www.tomshardware.com/3d-printing/anycubic-kobra-s1-review",
+      "https://wiki.anycubic.com/en/fdm-3d-printer/ace-pro/ace-pro-dryerguide",
+      "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/tpu-printing-guide",
+      "https://overture3d.com/blogs/overture-blogs/how-to-dry-3d-printer-filament",
+      "https://wiki.bambulab.com/en/filament-acc/filament/dry-filament"
+    ]
+  },
+  "connectivity_facts": {
+    "wifi": "Wi-Fi 2,4 GHz uniquement (pas de 5 GHz, pas de bande mixte).",
+    "slicer_native": "Anycubic Slicer Next (fork d'OrcaSlicer).",
+    "orca_send_support": "OrcaSlicer peut envoyer des fichiers depuis le firmware V2.5.9.9 ; .gcode et .3mf supportés.",
+    "lan_note": "En firmware stock, seul ASN supporte officiellement l'envoi en réseau local ; Rinkhals débloque l'envoi LAN direct depuis Orca.",
+    "sources": [
+      "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting",
+      "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/lan-connection-guide"
+    ]
+  },
+  "sources": [
+    "https://www.tomshardware.com/3d-printing/anycubic-kobra-s1-review",
+    "https://wiki.anycubic.com/en/software-and-app/new-page-anycubic-slicer-beta(orca-version)",
+    "https://wiki.anycubic.com/en/software-and-app/new-page-anycubic-slicer-beta(orca-version)/anycubic-slicer-next-(orca-version)-update-record",
+    "https://www.creativebloq.com/3d/anycubic-kobra-s1-combo-review-excellent-when-it-works-frustrating-when-it-doesnt",
+    "https://www.obico.io/blog/orca-slicer-download/",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/lan-connection-guide",
+    "https://github.com/OrcaSlicer/OrcaSlicer/issues/11632",
+    "https://github.com/jbatonnet/Rinkhals",
+    "https://github.com/jbatonnet/Rinkhals/blob/master/docs/docs/guides/orca-slicer-usage.md",
+    "https://jbatonnet.github.io/Rinkhals/",
+    "https://github.com/Kobra-S1/ACEPRO",
+    "https://github.com/OrcaSlicer/OrcaSlicer/issues/7961",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting",
+    "https://github.com/MPC561/Anycubic-Kobra-S1-Orcaslicer-Profiles",
+    "https://github.com/ditschi/OrcaSlicer-user-profiles",
+    "https://www.voxelmatters.com/anycubic-kobra-s1-review-no-fuss-corexy-for-speed-and-reliability/",
+    "https://www.ryanmercer.com/ryansthoughts/2025/10/29/anycubic-kobra-s1-combo-review-the-budget-multi-color-beast",
+    "https://blog.linuxniche.com/2025/03/anycubic-kobra-s1-review/",
+    "https://3dwithus.com/anycubic-kobra-s1-combo-review-3d-printer-tests-tips-and-settings",
+    "https://wiki.anycubic.com/en/home/knowledge-sharing/reduce-waste",
+    "https://www.printables.com/model/1290304-anycubic-kobra-s1-large-volume-filament-waste-purg",
+    "https://www.youtube.com/watch?v=i5ce2Ow3F3M",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/tpu-printing-guide",
+    "https://wiki.anycubic.com/en/home/knowledge-sharing/tpu-printing-recommendations",
+    "https://store.anycubic.com/products/ace-2-pro",
+    "https://www.printables.com/model/1291687-5-to-1-filament-hub-for-anycubic-kobra-s1-combo",
+    "https://wiki.anycubic.com/en/fdm-3d-printer/ace-pro/ace-pro-dryerguide",
+    "https://overture3d.com/blogs/overture-blogs/how-to-dry-3d-printer-filament",
+    "https://wiki.bambulab.com/en/filament-acc/filament/dry-filament"
+  ]
+}

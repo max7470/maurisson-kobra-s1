@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "machine": "Anycubic Kobra S1 Combo + ACE Pro",
+    "part": "calibration",
+    "source_md": ["01-machine-et-wiki.md", "05-slicer-et-profils.md"],
+    "last_research": "2026-06-10",
+    "lang": "fr"
+  },
+  "auto_leveling": {
+    "method": "Automatique via jauge de contrainte (strain gauge).",
+    "description": "Depuis FW V2.4.8.3, le plateau préchauffe (+5 °C au-dessus de la cible) avant le leveling pour stabiliser thermiquement.",
+    "pitfall": "Ne pas lancer un leveling plateau froid si on imprime chaud.",
+    "note": "Le leveling auto ne rattrape pas tout (voir first_layer_manual_fix)."
+  },
+  "flow_calibration": {
+    "alias": "Pressure Advance automatique",
+    "description": "La S1 a un capteur de pression dans la buse : la « Flow Calibration » cochable avant chaque impression calibre automatiquement le pressure advance (consomme ~127 mm de filament, ~2 min).",
+    "priority": "valeur auto-calibrée > valeur PA manuelle > valeur par défaut",
+    "pitfall": "⚠️ Piège officiel : si la calibration échoue, AUCUN message — la machine continue avec la valeur par défaut. Indice : une calibration ratée finit nettement plus vite que 2 min.",
+    "failure_causes": [
+      "pas de filament",
+      "buse bouchée",
+      "vis d'extrudeur desserrées",
+      "filament emmêlé"
+    ],
+    "imprecision_causes": [
+      "buse tierce",
+      "filament humide"
+    ],
+    "when_to_rerun": [
+      "changement de marque/type de filament",
+      "changement de diamètre de buse",
+      "changement de température",
+      "changement de vitesse",
+      "changement d'accélération",
+      "après réparation de l'extrudeur"
+    ],
+    "activable_from": "l'écran machine, le slicer (≥ 1.3.5.4) ou l'app"
+  },
+  "input_shaping": {
+    "alias": "Compensation de vibrations",
+    "description": "Pas cochée par défaut ; à lancer uniquement après avoir déplacé la machine ou touché à la mécanique (courroies, etc.).",
+    "note": "Le bruit fort pendant le scan de résonance est normal."
+  },
+  "first_layer_manual_fix": {
+    "description": "Premier layer imparfait → calibration manuelle du plateau. Le wiki l'admet : le leveling auto ne rattrape pas tout. Procédure officielle si zones « fantômes » sur le 1er layer.",
+    "steps": [
+      "1. Imprimer le gcode de test premier layer officiel (https://wiki.anycubic.com/kobra-s1/xy240_pla_0.2_57m4s.gcode) ;",
+      "2. Vérifier que le hotend quick-release est bien clipsé ;",
+      "3. Nettoyer le plateau (eau + détergent) ;",
+      "4. Préchauffer le plateau 5–10 min à la température d'impression ;",
+      "5. Tourner la vis du coin défaillant sous le plateau d'1/4 de tour anti-horaire (clé Allen S2.0) — les 4 vis si les 4 coins sont creux ;",
+      "6. Re-leveler et réimprimer. Affiner par 1/4 de tours."
+    ],
+    "source": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/first-layer"
+  },
+  "recommended_order": [
+    "1. Temperature tower par bobine → choisir la temp la plus basse qui garde une bonne adhésion inter-couches.",
+    "2. Pressure Advance (PA tower) — avant le flow. La S1 est direct drive : valeurs typiquement 0,02–0,05 pour le PLA (point de départ ; le test Orca donne la valeur exacte). PETG un peu plus haut, TPU beaucoup plus haut. ASN propose en plus un « Adaptive Pressure Advance ».",
+    "3. Flow rate (pass 1 puis pass 2) — une fois par type de matériau (PLA/PETG/TPU), pas par bobine. Modèle de test dédié Kobra : Flow Rate Cube MakerWorld (https://makerworld.com/en/models/470614-anycubic-flow-rate-cube-calibration-kobra-series).",
+    "4. Retraction test si stringing (rappel : profils MPC561 = rétraction réduite vs 1,5 mm d'origine).",
+    "5. Bed mesh complet (5×5 voire 7×7 — recommandé par MPC561 avec son start G-code amélioré) avant les prints importants."
+  ],
+  "bed_and_temps": [
+    {
+      "material": "PLA",
+      "bed_c": "60",
+      "nozzle_c": "200-210",
+      "notes": "200 °C lent/propre, 210 °C pièces fonctionnelles ; ventilation 100 % dès couche 2 ; ouvrir la porte/le capot sur les longs prints PLA (machine fermée = heat creep)."
+    },
+    {
+      "material": "PETG",
+      "bed_c": "70-80 (75 °C bon compromis sur PEI)",
+      "nozzle_c": "230-250",
+      "notes": "PEI texturé : pas de colle nécessaire ; première couche lente (~15–20 mm/s) ; ne PAS dépasser 80 °C (pièce quasi indécollable)."
+    },
+    {
+      "material": "TPU",
+      "bed_c": "30-40",
+      "nozzle_c": "220-230",
+      "notes": "Alimentation directe uniquement (pas via l'ACE Pro). TPU ≥ 95A seulement sur la S1."
+    },
+    {
+      "material": "ABS/ASA",
+      "bed_c": "90-100",
+      "nozzle_c": "240-260",
+      "notes": "Porte fermée ; profils MPC561 disponibles."
+    }
+  ],
+  "first_days_misc": [
+    "WiFi : 2,4 GHz uniquement (pas de 5 GHz) — guide réseau (https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting).",
+    "Garder le firmware imprimante à jour via l'écran (les fixes ACE Pro sont fréquents).",
+    "Premier print multi-couleur : modèle 2 couleurs simple, flush multiplier 1,0 → puis re-slicer à 0,5 et comparer (bleeding ?). C'est le test le plus rentable du dossier.",
+    "La S1 est livrée avec une plaque PEI texturée flexible (machine fermée → ABS/ASA possibles)."
+  ],
+  "sources": [
+    {"label": "Flow Calibration / pressure advance (wiki Anycubic)", "url": "https://wiki.anycubic.com/en/home/knowledge-sharing/pressure-advance"},
+    {"label": "First layer (wiki Anycubic)", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1/first-layer"},
+    {"label": "FAQ wiki", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/faq"},
+    {"label": "wiki OrcaSlicer — pressure advance calib", "url": "https://github.com/OrcaSlicer/OrcaSlicer/wiki/pressure-advance-calib"},
+    {"label": "wiki OrcaSlicer — adaptive PA", "url": "https://github.com/OrcaSlicer/OrcaSlicer/wiki/adaptive-pressure-advance-calib"},
+    {"label": "Flow Rate Cube MakerWorld (Kobra series)", "url": "https://makerworld.com/en/models/470614-anycubic-flow-rate-cube-calibration-kobra-series"},
+    {"label": "3D Printed Decor — Kobra S1 PLA settings", "url": "https://3dprinteddecor.com/anycubic-kobra-s1-pla-settings/"},
+    {"label": "Overture — PETG bed temperature", "url": "https://overture3d.com/blogs/blogs/petg-bed-temperature"},
+    {"label": "Wevolver — PETG settings", "url": "https://www.wevolver.com/article/petg-print-settings"},
+    {"label": "MPC561 — profils OrcaSlicer Kobra S1", "url": "https://github.com/MPC561/Anycubic-Kobra-S1-Orcaslicer-Profiles"},
+    {"label": "Guide réseau (2,4 GHz uniquement)", "url": "https://wiki.anycubic.com/en/fdm-3d-printer/kobra-s1-combo/network-connection-guide-and-troubleshooting"}
+  ]
+}
