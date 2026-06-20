@@ -91,6 +91,12 @@
       "top_keys": ["strategy_tldr", "asn_vs_orca", "connect_to_orca", "orca_profiles", "speeds", "multicolor_purge", "tpu_and_ace", "ace_drying", "sources"]
     },
     {
+      "path": "data/slicer_course.json",
+      "topic": "Cours slicer pédagogique (Anycubic Slicer Next) — prose lisible + tables",
+      "use_when": "Quand il faut EXPLIQUER un réglage slicer en profondeur (pas juste la valeur) : layer height, 1re couche, line width, vitesse, wall loops, ordre des parois, top/bottom, couture, remplissage densité+motifs, T° buse/plateau, refroidissement, séchage, rétraction/stringing, supports, brim/skirt/raft, Z-offset, multicouleur/purge. Aussi 'où ça se règle' (onglets ASN) et la synthèse des réglages optimaux. Migré du manuel public.",
+      "top_keys": ["sections"]
+    },
+    {
       "path": "data/mods.json",
       "topic": "Mods, firmware custom, upgrades",
       "use_when": "Rinkhals (install/désinstall/garantie/compat firmware), sortir du cloud, Orca en réseau, Home Assistant, mods imprimables (ACE Pro, PTFE, châssis, + 15 mods machine spécifiques S1 dans printable_mods.machine_specific_s1), upgrades qui valent le coup vs gadgets, checklist de mise en œuvre.",
@@ -98,10 +104,10 @@
     },
     {
       "path": "data/models.json",
-      "topic": "Catalogue de modèles à imprimer (dédupliqué, vagues 1 à 6 + Bug-A-Salt)",
-      "use_when": "Trouver quoi imprimer : 616 modèles taggés (catégorie, multicolore/purge, supports, matériau, temps, difficulté) + 11 systèmes modulaires + 10 raccourcis de recherche + 8 modèles de calibration. Filtrer par 'categories', 'ace_pro_friendly', 'difficulty', 'material'. Les notes de thème des vagues sont dans 'theme_notes'.",
+      "topic": "Catalogue de modèles à imprimer (dédupliqué, vagues 1 à 6 + Bug-A-Salt + manuel public)",
+      "use_when": "Trouver quoi imprimer : 737 modèles taggés (catégorie, multicolore/purge, supports, matériau, temps, difficulté) + 11 systèmes modulaires + 10 raccourcis de recherche + 9 modèles de calibration. Filtrer par 'categories', 'ace_pro_friendly', 'difficulty', 'material'. Les notes de thème des vagues sont dans 'theme_notes'. Les 121 modèles fusionnés depuis le manuel public portent origin_files = 'manuels-hub:kobra-s1/index.html'.",
       "top_keys": ["purge_principle", "categories", "models", "systems", "search_shortcuts", "calibration_models", "first_week_order", "ace_pro_print_tips", "theme_notes", "sources"],
-      "counts": {"models": 616, "systems": 11, "search_shortcuts": 10, "calibration_models": 8},
+      "counts": {"models": 737, "systems": 11, "search_shortcuts": 10, "calibration_models": 9},
       "categories": ["airbnb", "animals", "auto_moto", "bar", "bugasalt", "coffee_tea", "cosplay", "deco_lighting", "electronics_maker", "gaming", "gifts", "home", "kids_school", "kitchen", "mechanical", "multicolor", "music", "photo_video", "plants", "repairs", "seasonal", "sewing_creative", "sport_outdoor", "toys", "travel_edc", "workshop_outdoor"]
     }
   ],

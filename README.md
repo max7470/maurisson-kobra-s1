@@ -41,8 +41,9 @@ Imprimante Kobra S1 Combo/
 │   ├── consumables.json     ← pièces & consommables à stocker
 │   ├── materials.json       ← guide des 10 filaments (temps, prix EU, marques, pièges)
 │   ├── slicer.json          ← slicer, profils, vitesses, purge multicouleur, séchage
+│   ├── slicer_course.json   ← COURS slicer pédagogique (chaque réglage expliqué) — migré du manuel public
 │   ├── mods.json            ← Rinkhals, sortie du cloud, Home Assistant, mods imprimables, upgrades
-│   └── models.json          ← CATALOGUE de modèles à imprimer (616 + systèmes + calibration), dédupliqué
+│   └── models.json          ← CATALOGUE de modèles à imprimer (737 + systèmes + calibration), dédupliqué
 ├── guide/                   ← prose lisible (markdown)
 │   ├── 01-machine.md
 │   ├── 02-demarrage-pieges.md
@@ -68,8 +69,9 @@ Imprimante Kobra S1 Combo/
 | Consommables | [`data/consumables.json`](data/consumables.json) | [guide/02](guide/02-demarrage-pieges.md) | Quoi stocker, où acheter |
 | Filaments | [`data/materials.json`](data/materials.json) | [guide/05](guide/05-filaments.md) | 10 matériaux, prix EU/Belgique, marques, kit de démarrage |
 | Slicer & profils | [`data/slicer.json`](data/slicer.json) | [guide/04](guide/04-slicer-profils.md) | ASN vs Orca, purge, vitesses, séchage |
+| Cours slicer | [`data/slicer_course.json`](data/slicer_course.json) | — | **Chaque réglage expliqué** (layer height, vitesse, parois, infill, T°, rétraction, supports, purge…) + où ça se règle dans ASN |
 | Mods & firmware | [`data/mods.json`](data/mods.json) | [guide/03](guide/03-mods-firmware.md) | Rinkhals, cloud, Home Assistant, upgrades, 15 mods machine S1 |
-| Modèles à imprimer | [`data/models.json`](data/models.json) | [guide/modeles/](guide/modeles/) | **616 modèles** dédupliqués (vagues 1-6 + Bug-A-Salt) + 11 systèmes + 8 calibration, 26 catégories |
+| Modèles à imprimer | [`data/models.json`](data/models.json) | [guide/modeles/](guide/modeles/) | **737 modèles** dédupliqués (vagues 1-6 + Bug-A-Salt + manuel public) + 11 systèmes + 9 calibration, 26 catégories |
 
 ---
 
