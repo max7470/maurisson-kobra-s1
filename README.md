@@ -7,6 +7,16 @@
 > 🔗 À rattacher au **Labo 3D de Maurisson** (skill `maurisson-3d`).
 > 📅 Recherche source : **2026-06-10** · Compilation/refonte JSON : **2026-06-20**.
 
+## 🌐 En ligne (GitHub)
+
+- **Repo** : https://github.com/max7470/maurisson-kobra-s1
+- **Tableau de bord** (GitHub Pages) : **https://max7470.github.io/maurisson-kobra-s1/**
+- **Base raw pour les IA** : `https://raw.githubusercontent.com/max7470/maurisson-kobra-s1/main/`
+  - Manifest d'entrée : `…/main/kobra-s1.json`
+  - Données : `…/main/data/<fichier>.json` (ex. `…/main/data/models.json`)
+
+> Sync multi-machine = **git** (`git pull --ff-only` en début de session, `git add -A && git commit && git push` en fin). Le clone vit en local **hors Drive** (Drive corromprait le `.git`).
+
 ---
 
 ## 🧭 Comment l'utiliser

@@ -8,7 +8,13 @@
     "compiled": "2026-06-20",
     "lang": "fr",
     "schema_version": 1,
-    "how_to_use": "Lis ce manifest pour t'orienter. Chaque domaine de connaissance est dans un fichier data/*.json autoportant et requêtable. Charge UNIQUEMENT le(s) fichier(s) pertinent(s) à la question posée (voir 'files' ci-dessous). Les 'quick_facts' et 'golden_rules' suffisent pour répondre aux questions de base sans rien charger d'autre.",
+    "how_to_use": "Lis ce manifest pour t'orienter. Chaque domaine de connaissance est dans un fichier data/*.json autoportant et requêtable. Charge UNIQUEMENT le(s) fichier(s) pertinent(s) à la question posée (voir 'files' ci-dessous). Les 'quick_facts' et 'golden_rules' suffisent pour répondre aux questions de base sans rien charger d'autre. En ligne, les chemins 'path' sont relatifs à online.raw_base.",
+    "online": {
+      "repo": "https://github.com/max7470/maurisson-kobra-s1",
+      "dashboard": "https://max7470.github.io/maurisson-kobra-s1/",
+      "raw_base": "https://raw.githubusercontent.com/max7470/maurisson-kobra-s1/main/",
+      "manifest": "https://raw.githubusercontent.com/max7470/maurisson-kobra-s1/main/kobra-s1.json"
+    },
     "linked_lab": "À rattacher au Labo 3D de Maurisson (skill maurisson-3d)"
   },
 
